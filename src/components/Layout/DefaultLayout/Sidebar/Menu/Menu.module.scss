@@ -1,0 +1,31 @@
+.menu {
+    width: 100%;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 21px;
+        right: 21px;
+        height: 0.5px;
+        margin: 20px 0;
+        background-color: #ccc;
+    }
+}
+
+.menu-item {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.8rem;
+    padding: 12px 21px;
+
+    &:focus {
+        border-left: 3px solid #ccc;
+        background-color: #3f3f3f;
+    }
+}
+
+.menu-title {
+    font-size: 1.8rem;
+    margin-left: 12px;
+}

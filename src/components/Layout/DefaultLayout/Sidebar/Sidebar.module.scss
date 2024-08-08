@@ -1,0 +1,24 @@
+.wrapper {
+    width: var(--sidebar-width);
+    height: 500px;
+    color: var(--text-white);
+    background-color: var(--background-color);
+}
+
+.logo {
+    height: var(--sidebar-logo-height);
+    display: flex;
+    align-items: center;
+    padding: 0 25px 0 25px;
+}
+
+.logo-icon {
+    font-size: 3rem;
+    display: inline-block;
+    padding: 10px;
+}
+
+.logo-title {
+    display: inline-block;
+    font-size: 3.5rem;
+}

@@ -4,6 +4,16 @@
 :root {
     --text-white: #fff;
     --text-black: #000;
+    --background-color: rgba(41, 41, 41, 1);
+
+    --sidebar-width: 240px;
+    --sidebar-logo-height: 70px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -13,4 +23,17 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
+    text-rendering: optimizeSpeed;
+}
+
+input,
+button,
+[tabindex] {
+    border: none;
+    background-color: transparent;
+}
+
+a[href] {
+    color: var(--text-white);
+    text-decoration: none;
 }
