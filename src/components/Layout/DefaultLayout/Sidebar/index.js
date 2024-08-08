@@ -5,6 +5,10 @@ import {
     faIcons,
     faList,
     faRecordVinyl,
+    faStar,
+    faClock,
+    faHeart,
+    faCloudArrowUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -44,6 +48,28 @@ function Sidebar() {
                     title="Thư Viện"
                     to={config.routes.mymusic}
                     icon={<FontAwesomeIcon icon={faList} />}
+                />
+            </Menu>
+            <Menu className={cx('menu-sub')}>
+                <MenuItem
+                    title="Top 100"
+                    to={config.routes.top}
+                    icon={<FontAwesomeIcon icon={faStar} />}
+                />
+                <MenuItem
+                    title="Nghe gần đây"
+                    to={config.routes.history}
+                    icon={<FontAwesomeIcon icon={faClock} />}
+                />
+                <MenuItem
+                    title="Bài hát yêu thích"
+                    to={config.routes.favorite}
+                    icon={<FontAwesomeIcon icon={faHeart} />}
+                />
+                <MenuItem
+                    title="Đã tải lên"
+                    to={config.routes.upload}
+                    icon={<FontAwesomeIcon icon={faCloudArrowUp} />}
                 />
             </Menu>
         </aside>

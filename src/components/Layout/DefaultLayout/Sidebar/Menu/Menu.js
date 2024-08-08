@@ -4,8 +4,8 @@ import styles from './Menu.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children }) {
-    return <nav className={cx('menu')}>{children}</nav>;
+function Menu({ children, className = null }) {
+    return <nav className={cx('menu', className)}>{children}</nav>;
 }
 
 export default Menu;
