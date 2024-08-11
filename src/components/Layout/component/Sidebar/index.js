@@ -1,20 +1,20 @@
-import classNames from 'classnames/bind';
 import {
-    faCompactDisc,
     faChartSimple,
+    faClock,
+    faCloudArrowUp,
+    faCompactDisc,
+    faHeart,
     faIcons,
-    faList,
+    faMusic,
     faRecordVinyl,
     faStar,
-    faClock,
-    faHeart,
-    faCloudArrowUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
 
-import styles from './Sidebar.module.scss';
-import Menu, { MenuItem } from './Menu';
 import config from '~/config';
+import Menu, { MenuItem } from './Menu';
+import styles from './Sidebar.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -47,7 +47,7 @@ function Sidebar() {
                 <MenuItem
                     title="Thư Viện"
                     to={config.routes.mymusic}
-                    icon={<FontAwesomeIcon icon={faList} />}
+                    icon={<FontAwesomeIcon icon={faMusic} />}
                 />
             </Menu>
             <Menu className={cx('menu-sub')}>

@@ -4,10 +4,13 @@
 :root {
     --text-white: #fff;
     --text-black: #000;
-    --background-color: rgba(41, 41, 41, 1);
+    --sidebar-bg-color: rgba(41, 41, 41, 1);
+    --header-bg-color: rgba(30, 30, 30, 0.8);
+    --header-bg-inner-color: hsla(0, 0%, 100%, 0.1);
 
     --sidebar-width: 240px;
     --sidebar-logo-height: 70px;
+    --padding-section: 59px;
 }
 
 * {

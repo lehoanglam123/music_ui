@@ -5,6 +5,7 @@ import Favorite from '~/pages/Favorite';
 import Genres from '~/pages/Genres';
 import History from '~/pages/History';
 import Library from '~/pages/Library';
+import Live from '~/pages/Live';
 import Search from '~/pages/Search';
 import Top from '~/pages/Top';
 import Upload from '~/pages/Upload';
@@ -18,6 +19,7 @@ const publicRoutes = [
     { path: config.routes.top, component: Top },
     { path: config.routes.history, component: History },
     { path: config.routes.upload, component: Upload },
+    { path: config.routes.live, component: Live },
     { path: config.routes.search, component: Search, layout: null },
 ];
 

@@ -8,6 +8,7 @@ const routes = {
     top: '/top',
     history: '/history',
     upload: '/upload',
+    live: '/live',
 };
 
 export default routes;

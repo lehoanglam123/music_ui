@@ -1,0 +1,50 @@
+.search {
+    position: relative;
+    display: flex;
+    height: var(--search-height);
+    width: var(--search-width);
+    padding-left: 16px;
+    background-color: #fff;
+    border-radius: var(--search-border-radius);
+
+    input {
+        height: 100%;
+        flex: 1;
+        font-size: 1.5rem;
+        outline: none;
+        border: none;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: var(--search-top-spacer);
+        right: var(--search-button-width);
+        width: 1px;
+        height: calc(var(--search-height) - var(--search-top-spacer) * 2);
+        background-color: #000;
+    }
+}
+
+.clear,
+.loading {
+    position: absolute;
+    right: calc(var(--search-button-width) + 16px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+}
+
+.clear {
+}
+
+.search-btn {
+    width: var(--search-button-width);
+    height: 100%;
+    color: #333;
+    opacity: 0.8;
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+    }
+}
