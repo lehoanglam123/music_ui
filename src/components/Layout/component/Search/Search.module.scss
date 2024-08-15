@@ -1,10 +1,14 @@
+.search,
+.search-result {
+    width: 400px;
+}
+
 .search {
     position: relative;
     display: flex;
     height: var(--search-height);
-    width: var(--search-width);
     padding-left: 16px;
-    background-color: #fff;
+    background-color: var(--header-bg-inner-color);
     border-radius: var(--search-border-radius);
 
     input {
@@ -13,6 +17,7 @@
         font-size: 1.5rem;
         outline: none;
         border: none;
+        color: var(--text-search-color);
     }
 
     &::after {
@@ -22,8 +27,16 @@
         right: var(--search-button-width);
         width: 1px;
         height: calc(var(--search-height) - var(--search-top-spacer) * 2);
-        background-color: #000;
+        background-color: var(--text-search-color);
+        opacity: 0.8;
     }
+}
+
+.search-title {
+    padding: 0 10px 8px 10px;
+}
+
+.search-result {
 }
 
 .clear,
@@ -32,16 +45,18 @@
     right: calc(var(--search-button-width) + 16px);
     top: 50%;
     transform: translateY(-50%);
-    color: #ccc;
+    color: var(--text-search-color);
 }
 
 .clear {
 }
 
+/*search button*/
+
 .search-btn {
     width: var(--search-button-width);
     height: 100%;
-    color: #333;
+    color: var(--text-search-color);
     opacity: 0.8;
     &:hover {
         cursor: pointer;

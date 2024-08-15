@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
+import 'tippy.js/dist/tippy.css';
 
+import { faGear, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import config from '~/config';
 import { Search } from '../Search';
 import styles from './Header.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 function Header() {
