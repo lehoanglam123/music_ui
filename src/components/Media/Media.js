@@ -1,13 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsis, faPlay } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 
 import styles from './Media.module.scss';
 
 const cx = classNames.bind(styles);
-function Media({ data, className, right }) {
+function Media({ data, className, right = false }) {
     // console.log(data.image);
     return (
         <div className={cx('media', className)}>
@@ -26,6 +26,10 @@ function Media({ data, className, right }) {
             </div>
             {right && (
                 <div className={cx('media-right')}>
+                    <FontAwesomeIcon
+                        className={cx('media-play')}
+                        icon={faPlay}
+                    />
                     <FontAwesomeIcon
                         className={cx('icon-heart')}
                         icon={faHeart}

@@ -15,19 +15,22 @@ import classNames from 'classnames/bind';
 import config from '~/config';
 import Menu, { MenuItem } from './Menu';
 import styles from './Sidebar.module.scss';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Sidebar() {
     return (
         <aside className={cx('wrapper')}>
-            <h2 className={cx('logo')}>
-                <FontAwesomeIcon
-                    className={cx('logo-icon')}
-                    icon={faCompactDisc}
-                />
-                <p className={cx('logo-title')}>Music</p>
-            </h2>
+            <Link to={config.routes.explore}>
+                <h2 className={cx('logo')}>
+                    <FontAwesomeIcon
+                        className={cx('logo-icon')}
+                        icon={faCompactDisc}
+                    />
+                    <p className={cx('logo-title')}>Music</p>
+                </h2>
+            </Link>
             <Menu>
                 <MenuItem
                     title="Khám Phá"

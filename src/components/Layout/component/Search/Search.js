@@ -11,6 +11,8 @@ import classNames from 'classnames/bind';
 import { Wrapper as PopperWrapper } from '~/components/Layout/Popper';
 import Media from '~/components/Media';
 import styles from './Search.module.scss';
+import Suggest from './Suggest';
+import SuggestItem from '~/components/Layout/component/Search/Suggest/SuggestItem';
 
 const cx = classNames.bind(styles);
 const data = {
@@ -40,13 +42,22 @@ function Search() {
             interactive
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper className={'list-song'}>
+                    <PopperWrapper>
+                        <h4 className={cx('search-title')}>
+                            Từ khóa liên quan
+                        </h4>
+                        <Suggest>
+                            <SuggestItem />
+                            <SuggestItem />
+                            <SuggestItem />
+                            <SuggestItem />
+                        </Suggest>
                         <h4 className={cx('search-title')}>Gợi ý kết quả</h4>
-                        <Media data={data} className={'song'} />
-                        <Media data={data} className={'song'} />
-                        <Media data={data} className={'song'} />
-                        <h4 className={cx('search-title')}>Gợi ý kết quả</h4>
-                        <Media data={data} className={'song'} />
+                        <div className={cx('suggest-list')}>
+                            <Media data={data} className={'song'} right />
+                            <Media data={data} className={'song'} />
+                            <Media data={data} className={'song'} />
+                        </div>
                     </PopperWrapper>
                 </div>
             )}
