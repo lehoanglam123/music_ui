@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames/bind';
 import {
     faCircleXmark,
     faSearch,
@@ -6,23 +7,44 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
-import classNames from 'classnames/bind';
 
 import { Wrapper as PopperWrapper } from '~/components/Layout/Popper';
+import SuggestItem from '~/components/Layout/component/Search/Suggest/SuggestItem';
 import Media from '~/components/Media';
 import styles from './Search.module.scss';
 import Suggest from './Suggest';
-import SuggestItem from '~/components/Layout/component/Search/Suggest/SuggestItem';
 
 const cx = classNames.bind(styles);
-const data = {
-    song: 'Làm sao giữ',
-    artist: 'Phan Mạnh Quỳnh',
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png',
-};
+
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
+    const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
+
+    // console.log(searchValue);
+    const inputRef = useRef();
+
+    useEffect(() => {
+        if (!searchValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+        setLoading(true);
+        fetch(
+            `http://localhost:8080/api/admin/song/search?q=${encodeURIComponent(
+                searchValue,
+            )}`,
+        )
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res.data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+    }, [searchValue]);
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
@@ -31,14 +53,24 @@ function Search() {
         }
     };
 
-    const handleClear = () => {};
+    const handleClear = () => {
+        setSearchValue('');
+        setSearchResult([]);
+        inputRef.current.focus();
+    };
 
     const handleMouseDown = (e) => {};
 
-    const handleFocus = (e) => {};
+    const handleHideResult = () => {
+        setShowResult(false);
+    };
+
+    const handleFocus = () => {
+        setShowResult(true);
+    };
     return (
         <Tippy
-            visible={true}
+            visible={showResult && searchResult.length > 0}
             interactive
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -54,26 +86,40 @@ function Search() {
                         </Suggest>
                         <h4 className={cx('search-title')}>Gợi ý kết quả</h4>
                         <div className={cx('suggest-list')}>
-                            <Media data={data} className={'song'} right />
-                            <Media data={data} className={'song'} />
-                            <Media data={data} className={'song'} />
+                            {searchResult.map((result) => (
+                                <Media
+                                    className={'song'}
+                                    key={result.id}
+                                    data={result}
+                                    right
+                                />
+                            ))}
                         </div>
                     </PopperWrapper>
                 </div>
             )}
+            onClickOutside={handleHideResult}
         >
             <div className={cx('search')}>
                 <input
+                    ref={inputRef}
                     value={searchValue}
                     type="text"
                     placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..."
                     onChange={handleChange}
                     onFocus={handleFocus}
                 />
-                <button className={cx('clear')} onClick={handleClear}>
-                    <FontAwesomeIcon icon={faCircleXmark} />
-                </button>
-                <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />
+                {!!searchValue && !loading && (
+                    <button className={cx('clear')} onClick={handleClear}>
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                    </button>
+                )}
+                {loading && (
+                    <FontAwesomeIcon
+                        icon={faSpinner}
+                        className={cx('loading')}
+                    />
+                )}
                 <button
                     className={cx('search-btn')}
                     onMouseDown={handleMouseDown}
