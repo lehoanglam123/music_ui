@@ -3,14 +3,20 @@ import { faEllipsis, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
-import styles from './Media.module.scss';
 import images from '../assets/images';
+import styles from './Media.module.scss';
 
 const cx = classNames.bind(styles);
-function Media({ data, className, right = false }) {
+function Media({ data, className, right = false, song = false }) {
     // console.log(!!data.image);
+
+    const classes = cx('media', {
+        [className]: className,
+        right,
+        song,
+    });
     return (
-        <div className={cx('media', className)}>
+        <div className={classes}>
             <div className={cx('media-left')}>
                 <figure>
                     <img

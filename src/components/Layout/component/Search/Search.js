@@ -13,6 +13,7 @@ import SuggestItem from '~/components/Layout/component/Search/Suggest/SuggestIte
 import Media from '~/components/Media';
 import styles from './Search.module.scss';
 import Suggest from './Suggest';
+import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -22,19 +23,23 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    // console.log(searchValue);
+    const debounce = useDebounce(searchValue, 500);
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounce.trim()) {
             setSearchResult([]);
             return;
         }
         setLoading(true);
         fetch(
             `http://localhost:8080/api/admin/song/search?q=${encodeURIComponent(
-                searchValue,
+                debounce,
             )}`,
+            {
+                method: 'GET',
+                cache: 'no-store',
+            },
         )
             .then((res) => res.json())
             .then((res) => {
@@ -44,7 +49,7 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debounce]);
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
@@ -88,7 +93,7 @@ function Search() {
                         <div className={cx('suggest-list')}>
                             {searchResult.map((result) => (
                                 <Media
-                                    className={'song'}
+                                    song
                                     key={result.id}
                                     data={result}
                                     right
