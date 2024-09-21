@@ -51,6 +51,19 @@
     color: var(--text-search-color);
 }
 
+.loading {
+    animation: spinner 0.8s linear infinite; /* Tạo hiệu ứng quay */
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0); /* Bắt đầu từ góc 0 */
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg); /* Quay 360 độ */
+    }
+}
+
 .clear {
 }
 

@@ -21,6 +21,23 @@
     }
 }
 
+.loading {
+    font-size: 2.5rem;
+}
+
+.clear {
+    animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
 /*Media Left*/
 .media-left {
     margin-right: 10px;
