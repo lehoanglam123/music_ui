@@ -1,30 +1,25 @@
-import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
-import {
-    faChevronRight,
-    faCircleInfo,
-    faCirclePlay,
-    faGear,
-    faPalette,
-    faShieldHalved,
-    faSquarePhone,
-    faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import { faGear, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-regular-svg-icons';
 import Tippy from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import config from '~/config';
 import { Search } from '../Search';
 import styles from './Header.module.scss';
-import { Wrapper as PopperWrapper } from '~/components/Layout/Popper';
-import { useState } from 'react';
+import SettingMenu from './SettingMenu';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const [showSettings, setShowSettings] = useState(false);
     const currentUser = true;
+
+    const handleSetting = () => {
+        setShowSettings(!showSettings);
+    };
+
     return (
         <div className={cx('wrapper')}>
             <nav className={cx('nav-sub')}>
@@ -36,90 +31,17 @@ function Header() {
                 <Tippy
                     visible={showSettings}
                     interactive
+                    placement="bottom-end"
+                    onClickOutside={handleSetting}
                     render={(attrs) => (
                         <div tabIndex="-1" {...attrs}>
-                            <PopperWrapper className={cx('settings')}>
-                                <div className={cx('setting-header')}>
-                                    <div className={cx('setting-item')}>
-                                        <FontAwesomeIcon
-                                            className={cx('item-icon')}
-                                            icon={faCirclePlay}
-                                        />
-                                        <span className={cx('title')}>
-                                            Trình phát nhạc
-                                        </span>
-                                        <FontAwesomeIcon
-                                            icon={faChevronRight}
-                                        />
-                                    </div>
-                                    <div className={cx('setting-item')}>
-                                        <FontAwesomeIcon
-                                            className={cx('item-icon')}
-                                            icon={faPalette}
-                                        />
-                                        <span className={cx('title')}>
-                                            Giao diện
-                                        </span>
-                                        <FontAwesomeIcon
-                                            icon={faChevronRight}
-                                        />
-                                    </div>
-                                </div>
-                                <div className={cx('setting-container')}>
-                                    <ul className={cx('setting-list')}>
-                                        <li className={cx('setting-item')}>
-                                            <a href="">
-                                                <FontAwesomeIcon
-                                                    className={cx('item-icon')}
-                                                    icon={faCircleInfo}
-                                                />
-                                                <span className={cx('title')}>
-                                                    Giới thiệu
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li className={cx('setting-item')}>
-                                            <a href="">
-                                                <FontAwesomeIcon
-                                                    className={cx('item-icon')}
-                                                    icon={faShieldHalved}
-                                                />
-                                                <span className={cx('title')}>
-                                                    Chính sách bảo mật
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li className={cx('setting-item')}>
-                                            <a href="">
-                                                <FontAwesomeIcon
-                                                    className={cx('item-icon')}
-                                                    icon={faFlag}
-                                                />
-                                                <span className={cx('title')}>
-                                                    Báo cáo quy phạm bản quyền
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li className={cx('setting-item')}>
-                                            <a href="">
-                                                <FontAwesomeIcon
-                                                    className={cx('item-icon')}
-                                                    icon={faSquarePhone}
-                                                />
-                                                <span className={cx('title')}>
-                                                    Liên hệ
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </PopperWrapper>
+                            <SettingMenu />
                         </div>
                     )}
                 >
                     <button
                         className={cx('btn-settings')}
-                        onClick={() => setShowSettings(!showSettings)}
+                        onClick={handleSetting}
                     >
                         <FontAwesomeIcon
                             className={cx('setting-icon')}
