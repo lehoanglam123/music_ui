@@ -1,23 +1,35 @@
-import { faGear, faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tippy from '@tippyjs/react/headless';
-import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Tippy from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
+import {
+    faGear,
+    faUser,
+    faArrowRightFromBracket,
+    faBan,
+    faUpload,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import config from '~/config';
 import { Search } from '../Search';
 import styles from './Header.module.scss';
 import SettingMenu from './SettingMenu';
+import UserMenu from './UserMenu';
 
 const cx = classNames.bind(styles);
 
 function Header() {
-    const [showSettings, setShowSettings] = useState(false);
+    const [showSettingMenu, setShowSettingMenu] = useState(false);
+    const [showUserSetting, setShowUserSetting] = useState(false);
     const currentUser = true;
 
-    const handleSetting = () => {
-        setShowSettings(!showSettings);
+    const handleSettingMenu = () => {
+        setShowSettingMenu(!showSettingMenu);
+    };
+
+    const handleSettingUser = () => {
+        setShowUserSetting(!showUserSetting);
     };
 
     return (
@@ -29,10 +41,10 @@ function Header() {
             <Search />
             <div className={cx('actions')}>
                 <Tippy
-                    visible={showSettings}
+                    visible={showSettingMenu}
                     interactive
                     placement="bottom-end"
-                    onClickOutside={handleSetting}
+                    onClickOutside={handleSettingMenu}
                     render={(attrs) => (
                         <div tabIndex="-1" {...attrs}>
                             <SettingMenu />
@@ -41,7 +53,7 @@ function Header() {
                 >
                     <button
                         className={cx('btn-settings')}
-                        onClick={handleSetting}
+                        onClick={handleSettingMenu}
                     >
                         <FontAwesomeIcon
                             className={cx('setting-icon')}
@@ -49,17 +61,32 @@ function Header() {
                         />
                     </button>
                 </Tippy>
-                <button className={cx('btn-user')}>
-                    {currentUser ? (
-                        <img
-                            className={cx('user-avatar')}
-                            src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
-                            alt="User"
-                        />
-                    ) : (
-                        <FontAwesomeIcon icon={faUser} />
+                <Tippy
+                    visible={showUserSetting}
+                    interactive
+                    placement="bottom-end"
+                    onClickOutside={handleSettingUser}
+                    render={(attrs) => (
+                        <div {...attrs}>
+                            <UserMenu />
+                        </div>
                     )}
-                </button>
+                >
+                    <button
+                        className={cx('btn-user')}
+                        onClick={handleSettingUser}
+                    >
+                        {currentUser ? (
+                            <img
+                                className={cx('user-avatar')}
+                                src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
+                                alt="User"
+                            />
+                        ) : (
+                            <FontAwesomeIcon icon={faUser} />
+                        )}
+                    </button>
+                </Tippy>
             </div>
         </div>
     );
