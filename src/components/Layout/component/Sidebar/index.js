@@ -1,3 +1,4 @@
+import classNames from 'classnames/bind';
 import {
     faChartSimple,
     faClock,
@@ -10,7 +11,6 @@ import {
     faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames/bind';
 
 import config from '~/config';
 import Menu, { MenuItem } from './Menu';

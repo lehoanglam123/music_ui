@@ -1,15 +1,9 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { faGear, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import {
-    faGear,
-    faUser,
-    faArrowRightFromBracket,
-    faBan,
-    faUpload,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import config from '~/config';
 import { Search } from '../Search';

@@ -1,8 +1,10 @@
 .wrapper {
     display: flex;
     flex-direction: row;
+    height: 1000px;
 }
 
 .container {
-    width: calc(100% - var(--sidebar-width));
+    width: 100%;
+    transform: translate(var(--sidebar-width), var(--sidebar-logo-height));
 }

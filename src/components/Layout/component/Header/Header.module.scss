@@ -9,9 +9,12 @@
 
     --text-search-color: #eee;
 
-    width: 100%;
+    position: fixed;
+    z-index: 1;
     display: flex;
     align-items: center;
+    width: calc(100% - 240px);
+    margin-left: var(--sidebar-width);
     padding: 0 var(--padding-section);
     height: var(--sidebar-logo-height);
     justify-content: space-between;
@@ -149,12 +152,16 @@
 
 .user-individual {
     padding: 10px;
+
     .individual-title > button {
         font-weight: 600;
         font-size: 16px;
         line-height: 19px;
         margin-bottom: 8px;
         text-transform: none;
+    }
+    .individual-title {
+        margin-bottom: 8px;
     }
 }
 
@@ -171,6 +178,8 @@
     &:hover {
         cursor: pointer;
         color: var(--text-white);
+        border-radius: 4px;
+        background-color: var(--color-setting-item-hover);
     }
 }
 

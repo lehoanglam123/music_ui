@@ -1,4 +1,6 @@
 .wrapper {
+    position: fixed;
+    z-index: 1;
     width: var(--sidebar-width);
     height: 600px;
     color: var(--text-white);
