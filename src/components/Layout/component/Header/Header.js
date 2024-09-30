@@ -10,6 +10,7 @@ import { Search } from '../Search';
 import styles from './Header.module.scss';
 import SettingMenu from './SettingMenu';
 import UserMenu from './UserMenu';
+import images from '~/components/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -73,7 +74,7 @@ function Header() {
                         {currentUser ? (
                             <img
                                 className={cx('user-avatar')}
-                                src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
+                                src={images.noImage}
                                 alt="User"
                             />
                         ) : (

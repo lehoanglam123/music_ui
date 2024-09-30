@@ -1,10 +1,16 @@
-.wrapper {
+.player {
     width: 100%;
+    color: var(--text-white);
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     bottom: 0;
     z-index: 2;
-    cursor: pointer;
     min-width: 770px;
+    padding: 0 20px;
     height: 90px;
-    background-color: #34224f;
+    cursor: pointer;
+    border-top: #ffffff1a solid 1px;
+    background-color: var(--primary-bg);
 }

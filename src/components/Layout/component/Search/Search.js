@@ -29,7 +29,7 @@ function Search() {
 
     useEffect(() => {
         if (!debounce.trim()) {
-            setSearchResult([]);
+            setSearchResult([1, 2, 3]);
             return;
         }
         setLoading(true);
@@ -76,7 +76,7 @@ function Search() {
     };
     return (
         <Tippy
-            visible={showResult && searchResult.length > 0}
+            visible={true} //{showResult && searchResult.length > 0}
             interactive
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -94,9 +94,10 @@ function Search() {
                         <div className={cx('suggest-list')}>
                             {searchResult.map((result) => (
                                 <Media
-                                    song
-                                    key={result.id}
-                                    data={result}
+                                    key={result}
+                                    size={'medium'}
+                                    className={'media-song'}
+                                    hoverToShowRight={true}
                                     right
                                 />
                             ))}

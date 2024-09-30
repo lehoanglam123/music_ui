@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Wrapper as PopperWrapper } from '~/components/Layout/Popper';
 import styles from './Header.module.scss';
+import images from '~/components/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +19,7 @@ function UserMenu() {
                 <div className={cx('user-info')}>
                     <img
                         className={cx('user-image')}
-                        src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
+                        src={images.noImage}
                         alt="User"
                     />
                     <div className={cx('info-container')}>

@@ -1,104 +1,75 @@
 .media {
     display: flex;
-    padding: 10px;
-    user-select: none;
+    align-items: center;
     cursor: pointer;
+    color: var(--text-white);
 }
 
-.song {
-    padding: 8px 10px;
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+.small {
+    width: 40px;
+    height: 40px;
+}
+
+.medium {
+    width: 50px;
+    height: 50px;
+}
+
+.large {
+    width: 64px;
+    height: 64px;
+}
+
+//Media Left
+
+.media-left {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    .image {
         border-radius: 4px;
     }
-
-    &:hover .media-right {
-        display: flex;
-    }
-
-    &:hover .media-image {
-        opacity: 0.4;
-    }
 }
 
-.loading {
-    font-size: 2.5rem;
-}
+//Media Content
 
-.clear {
-    animation: spinner 0.8s linear infinite;
-}
-
-@keyframes spinner {
-    from {
-        transform: translateY(-50%) rotate(0);
-    }
-    to {
-        transform: translateY(-50%) rotate(360deg);
-    }
-}
-
-/*Media Left*/
-.media-left {
-    margin-right: 10px;
-}
-
-.media-image {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 52px;
-    width: 52px;
-    overflow: hidden;
-    border-radius: 4px;
-}
-
-/*Media Content*/
 .media-content {
-    display: flex;
-    flex: 1;
-    text-align: left;
-    flex-direction: column;
-    justify-content: center;
+    margin-right: 20px;
+    .song-name {
+        display: block;
+        font-size: 1.6rem;
+    }
+
+    .artist-name {
+        color: #ffffff80;
+        font-size: 1.4rem;
+    }
 }
 
-.song-name,
-.artist-name {
-    font-weight: 600;
-}
-
-.song-name {
-    font-size: 1.6rem;
-    line-height: 1.5;
-}
-
-.artist-name {
-    font-size: 1.4rem;
-    opacity: 0.8;
-}
-
-/*Media right*/
+//Media right
 
 .media-right {
-    display: none;
-    align-items: center;
-    justify-items: left;
+    margin-left: auto;
+    .media-item {
+        width: 16px;
+        height: 16px;
+        padding: 8px;
+        margin: 0 2px;
+
+        &:hover {
+            border-radius: 50%;
+            background-color: var(--alpha-color);
+        }
+    }
 }
 
-.media-play {
-    position: absolute;
-    font-size: 2rem;
-    left: calc(((52px / 2) + 20px) - 7.5px);
-}
+//Media-song
 
-.media-right .icon-heart,
-.media-right .icon-options {
-    font-size: 1.6rem;
-    padding: 10px;
-    border-radius: 999px;
+.media-song {
+    padding: 8px 10px;
 
     &:hover {
-        cursor: pointer;
-        background-color: var(--header-bg-inner-color);
+        border-radius: 4px;
+        background-color: var(--alpha-color);
     }
 }
