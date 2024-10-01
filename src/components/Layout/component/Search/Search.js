@@ -29,7 +29,7 @@ function Search() {
 
     useEffect(() => {
         if (!debounce.trim()) {
-            setSearchResult([1, 2, 3]);
+            setSearchResult([]);
             return;
         }
         setLoading(true);
@@ -76,7 +76,7 @@ function Search() {
     };
     return (
         <Tippy
-            visible={true} //{showResult && searchResult.length > 0}
+            visible={showResult && searchResult.length > 0}
             interactive
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -86,19 +86,18 @@ function Search() {
                         </h4>
                         <Suggest>
                             <SuggestItem />
-                            <SuggestItem />
-                            <SuggestItem />
-                            <SuggestItem />
                         </Suggest>
                         <h4 className={cx('search-title')}>Gợi ý kết quả</h4>
                         <div className={cx('suggest-list')}>
                             {searchResult.map((result) => (
                                 <Media
-                                    key={result}
+                                    key={result.id}
+                                    data={result}
                                     size={'medium'}
                                     className={'media-song'}
                                     hoverToShowRight={true}
                                     right
+                                    play
                                 />
                             ))}
                         </div>

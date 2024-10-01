@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import {
     faEllipsis,
     faMicrophoneLines,
+    faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,6 +20,8 @@ function Media({
     right = false,
     list = false,
     hoverToShowRight = false,
+    play = false,
+    data,
 }) {
     const [isHovered, setIshovered] = useState(false);
     const classes = cx('media', {
@@ -36,6 +39,7 @@ function Media({
             setIshovered(false);
         }
     };
+    console.log(data.id);
 
     return (
         <div
@@ -46,17 +50,17 @@ function Media({
             <div className={cx('media-left')}>
                 <img
                     className={cx('image', size)}
-                    src={images.noImage}
+                    src={images.avatarImage}
                     alt="Avatar"
                 />
             </div>
             <div className={cx('media-content')}>
-                <span className={cx('song-name')}>Còn Lại gì sau cơn mưa</span>
+                <span className={cx('song-name')}>songname</span>
                 <NavLink
                     className={cx('artist-name')}
                     to={config.routes.explore}
                 >
-                    Hồ Quang Hiếu
+                    tác giả
                 </NavLink>
             </div>
             {right && (!hoverToShowRight || isHovered) && (
@@ -65,6 +69,12 @@ function Media({
                         <FontAwesomeIcon
                             className={cx('media-item')}
                             icon={faMicrophoneLines}
+                        />
+                    )}
+                    {play && (
+                        <FontAwesomeIcon
+                            className={cx('media-play')}
+                            icon={faPlay}
                         />
                     )}
                     <FontAwesomeIcon

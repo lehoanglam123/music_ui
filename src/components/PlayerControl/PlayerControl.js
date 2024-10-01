@@ -10,7 +10,7 @@ function PlayerControl({ data }) {
     return (
         <div className={cx('player')}>
             <div className="control-left">
-                <Media size={'large'} right />
+                <Media className={'media-player'} size={'large'} right />
             </div>
             <div className="control-center">Play control</div>
             <div className="control-right">Options</div>
