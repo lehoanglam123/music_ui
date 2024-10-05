@@ -39,7 +39,8 @@ function Media({
             setIshovered(false);
         }
     };
-    console.log(data.id);
+    // console.log(data);
+    // console.log(data.artistName);
 
     return (
         <div
@@ -50,17 +51,17 @@ function Media({
             <div className={cx('media-left')}>
                 <img
                     className={cx('image', size)}
-                    src={images.avatarImage}
+                    src={data?.image || images.avatarImage}
                     alt="Avatar"
                 />
             </div>
             <div className={cx('media-content')}>
-                <span className={cx('song-name')}>songname</span>
+                <span className={cx('song-name')}>{data?.songName}</span>
                 <NavLink
                     className={cx('artist-name')}
                     to={config.routes.explore}
                 >
-                    tác giả
+                    {data?.artistName}
                 </NavLink>
             </div>
             {right && (!hoverToShowRight || isHovered) && (
