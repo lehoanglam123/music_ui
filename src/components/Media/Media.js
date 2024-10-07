@@ -39,8 +39,6 @@ function Media({
             setIshovered(false);
         }
     };
-    // console.log(data);
-    // console.log(data.artistName);
 
     return (
         <div
