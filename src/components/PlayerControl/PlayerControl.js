@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 
 import Media from '../Media';
 import style from './PlayerControl.module.scss';
+import PlayerBar from './PlayerBar';
 
 const cx = classNames.bind(style);
 
@@ -15,7 +16,7 @@ function PlayerControl() {
     // console.log(data.image);
     return (
         <div className={cx('player')}>
-            <div className="control-left">
+            <div className={cx('control-left')}>
                 <Media
                     data={data}
                     className={'media-player'}
@@ -23,8 +24,10 @@ function PlayerControl() {
                     right
                 />
             </div>
-            <div className="control-center">Play control</div>
-            <div className="control-right">Options</div>
+            <div className={cx('control-center')}>
+                <PlayerBar />
+            </div>
+            <div className={cx('control-right')}>Options</div>
         </div>
     );
 }
