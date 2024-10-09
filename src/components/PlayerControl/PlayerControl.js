@@ -13,7 +13,7 @@ const data = {
     artistName: 'Phan Mạnh Quỳnh',
 };
 function PlayerControl() {
-    // console.log(data.image);
+    // console.log('replay');
     return (
         <div className={cx('player')}>
             <div className={cx('control-left')}>

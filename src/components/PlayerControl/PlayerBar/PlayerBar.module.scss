@@ -1,7 +1,52 @@
 .player-bar {
     height: 100%;
+    width: 100%;
 }
+
+//Player Items
+
+.control-item {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 7px;
+}
+
+.item-play {
+    font-size: 35px;
+}
+
+//Player item and Duration
 .player-items,
 .player-duration {
     display: flex;
+    justify-content: center;
+}
+
+// Player Duration
+.player-duration {
+    width: 100%;
+}
+
+.control-btn {
+    color: var(--text-white);
+}
+
+.player-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.range {
+    height: 5px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.time-right,
+.time-left {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0 10px;
 }
