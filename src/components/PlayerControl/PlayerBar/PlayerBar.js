@@ -5,19 +5,28 @@ import {
     faRepeat,
     faShuffle,
 } from '@fortawesome/free-solid-svg-icons';
-import { faCirclePlay } from '@fortawesome/free-regular-svg-icons';
+import {
+    faCirclePause,
+    faCirclePlay,
+} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
 import style from './PlayerBar.module.scss';
 const cx = classNames.bind(style);
 function PlayerBar() {
-    const [counter, setCounter] = useState(0);
+    const [showPlay, setShowPlay] = useState(true);
+    const [showPause, setShowPause] = useState(false);
 
-    const handleCounter = () => {
-        setCounter(counter + 1);
+    const handlePlay = () => {
+        setShowPause(true);
+        setShowPlay(false);
     };
-    console.log(counter);
+
+    const handlePause = () => {
+        setShowPlay(true);
+        setShowPause(false);
+    };
     return (
         <div className={cx('player-bar')}>
             <div className={cx('player-items')}>
@@ -27,18 +36,28 @@ function PlayerBar() {
                         icon={faShuffle}
                     />
                 </button>
-                <button className={cx('control-btn')} onClick={handleCounter}>
+                <button className={cx('control-btn')}>
                     <FontAwesomeIcon
                         className={cx('control-item')}
                         icon={faBackwardStep}
                     />
                 </button>
-                <button className={cx('control-btn')}>
-                    <FontAwesomeIcon
-                        className={cx('control-item', 'item-play')}
-                        icon={faCirclePlay}
-                    />
-                </button>
+                {showPlay && (
+                    <button className={cx('control-btn')} onClick={handlePlay}>
+                        <FontAwesomeIcon
+                            className={cx('control-item', 'item-play')}
+                            icon={faCirclePlay}
+                        />
+                    </button>
+                )}
+                {showPause && (
+                    <button className={cx('control-btn')} onClick={handlePause}>
+                        <FontAwesomeIcon
+                            className={cx('control-item', 'item-play')}
+                            icon={faCirclePause}
+                        />
+                    </button>
+                )}
                 <button className={cx('control-btn')}>
                     <FontAwesomeIcon
                         className={cx('control-item')}
