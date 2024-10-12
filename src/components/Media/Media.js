@@ -14,6 +14,7 @@ import styles from './Media.module.scss';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
+
 function Media({
     className,
     size,
@@ -39,6 +40,8 @@ function Media({
             setIshovered(false);
         }
     };
+
+    const handlePlayMusic = () => {};
 
     return (
         <div
@@ -74,6 +77,7 @@ function Media({
                         <FontAwesomeIcon
                             className={cx('media-play')}
                             icon={faPlay}
+                            onClick={handlePlayMusic}
                         />
                     )}
                     <FontAwesomeIcon

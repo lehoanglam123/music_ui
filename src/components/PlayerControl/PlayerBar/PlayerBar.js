@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
     faBackwardStep,
     faForwardStep,
@@ -14,9 +14,8 @@ import classNames from 'classnames/bind';
 
 import style from './PlayerBar.module.scss';
 const cx = classNames.bind(style);
-function PlayerBar() {
+function PlayerBar({ data }) {
     const audioRef = useRef();
-    const [play, setPlay] = useState(false);
     const [showPlay, setShowPlay] = useState(true);
     const [showPause, setShowPause] = useState(false);
 
@@ -99,6 +98,7 @@ function PlayerBar() {
                 src={
                     'https://res.cloudinary.com/dcyemfp6o/video/upload/v1713276342/Music/Vietnam/Ch%C3%BAng%20ta%20c%E1%BB%A7a%20hi%E1%BB%87n%20t%E1%BA%A1i.mp3'
                 }
+                hidden
             />
         </div>
     );
