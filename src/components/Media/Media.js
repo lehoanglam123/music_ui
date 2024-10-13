@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import {
@@ -12,19 +12,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import images from '../assets/images';
 import styles from './Media.module.scss';
 import config from '~/config';
+import { GlobalDataContext } from '../GlobalContext';
 
 const cx = classNames.bind(styles);
 
 function Media({
-    className,
     size,
+    className,
     right = false,
     list = false,
-    hoverToShowRight = false,
     play = false,
+    hoverToShowRight = false,
     data,
 }) {
     const [isHovered, setIshovered] = useState(false);
+    const globalData = useContext(GlobalDataContext);
+
     const classes = cx('media', {
         [className]: className,
     });
@@ -41,7 +44,9 @@ function Media({
         }
     };
 
-    const handlePlayMusic = () => {};
+    const handlePlayMusic = () => {
+        globalData.handleShowPlayerControl(data);
+    };
 
     return (
         <div

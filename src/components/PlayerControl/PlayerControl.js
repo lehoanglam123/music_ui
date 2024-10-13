@@ -1,31 +1,26 @@
+import { useContext } from 'react';
 import classNames from 'classnames/bind';
 
 import Media from '../Media';
 import style from './PlayerControl.module.scss';
 import PlayerBar from './PlayerBar';
+import { GlobalDataContext } from '../GlobalContext';
 
 const cx = classNames.bind(style);
-
-const data = {
-    id: 9,
-    songName: 'Thật May Cho Anh',
-    genreName: 'nhạc Hàn',
-    artistName: 'Phan Mạnh Quỳnh',
-};
 function PlayerControl() {
-    // console.log('replay');
+    const dataGlobal = useContext(GlobalDataContext);
     return (
         <div className={cx('player')}>
             <div className={cx('control-left')}>
                 <Media
-                    data={data}
+                    data={dataGlobal.songData}
                     className={'media-player'}
                     size={'large'}
                     right
                 />
             </div>
             <div className={cx('control-center')}>
-                <PlayerBar />
+                <PlayerBar data={dataGlobal.songData} />
             </div>
             <div className={cx('control-right')}>Options</div>
         </div>

@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useEffect } from 'react';
+import classNames from 'classnames/bind';
 import {
     faBackwardStep,
     faForwardStep,
@@ -10,26 +11,23 @@ import {
     faCirclePlay,
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames/bind';
 
 import style from './PlayerBar.module.scss';
+import { GlobalDataContext } from '~/components/GlobalContext';
+
 const cx = classNames.bind(style);
+
 function PlayerBar({ data }) {
-    const audioRef = useRef();
-    const [showPlay, setShowPlay] = useState(true);
-    const [showPause, setShowPause] = useState(false);
+    const { isPlaying, handlePlayingAudio, handleStopAudio, setAudioRef } =
+        useContext(GlobalDataContext);
+    const audioRef = useRef(null);
+    // console.log(audioRef);
 
-    const handlePlayingAudio = () => {
-        setShowPlay(false);
-        setShowPause(true);
-        audioRef.current.play();
-    };
-
-    const handleStopAudio = () => {
-        setShowPlay(true);
-        setShowPause(false);
-        audioRef.current.pause();
-    };
+    useEffect(() => {
+        if (audioRef.current) {
+            setAudioRef(audioRef.current);
+        }
+    }, [setAudioRef]);
 
     return (
         <div className={cx('player-bar')}>
@@ -46,7 +44,7 @@ function PlayerBar({ data }) {
                         icon={faBackwardStep}
                     />
                 </button>
-                {showPlay && (
+                {!isPlaying ? (
                     <button
                         className={cx('control-btn')}
                         onClick={handlePlayingAudio}
@@ -56,8 +54,7 @@ function PlayerBar({ data }) {
                             icon={faCirclePlay}
                         />
                     </button>
-                )}
-                {showPause && (
+                ) : (
                     <button
                         className={cx('control-btn')}
                         onClick={handleStopAudio}
@@ -93,13 +90,7 @@ function PlayerBar({ data }) {
                 </div>
                 <span className={cx('time-left')}>03:40</span>
             </div>
-            <audio
-                ref={audioRef}
-                src={
-                    'https://res.cloudinary.com/dcyemfp6o/video/upload/v1713276342/Music/Vietnam/Ch%C3%BAng%20ta%20c%E1%BB%A7a%20hi%E1%BB%87n%20t%E1%BA%A1i.mp3'
-                }
-                hidden
-            />
+            <audio ref={audioRef} src={data.audio} hidden />
         </div>
     );
 }

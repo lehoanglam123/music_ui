@@ -1,25 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './DefaultLayout.module.scss';
 import Header from '~/components/Layout/component/Header';
 import Sidebar from '~/components/Layout/component/Sidebar';
 import PlayerControl from '~/components/PlayerControl';
-import images from '~/components/assets/images';
+import { GlobalDataContext } from '~/components/GlobalContext';
 
-const data = {
-    songName: 'Thật may cho anh',
-    image: images.noImage,
-    artistName: 'Phan Mạnh Quỳnh',
-};
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
-    const playerControl = true;
-    // console.log(data.image);
+    const dataGlobal = useContext(GlobalDataContext);
     return (
         <div className={cx('wrapper')}>
-            {playerControl ? <PlayerControl data={data} /> : <></>}
+            {dataGlobal.showPlayerControl ? <PlayerControl /> : <></>}
             <Sidebar />
             <Header />
             <div className={cx('container')}>{children}</div>
