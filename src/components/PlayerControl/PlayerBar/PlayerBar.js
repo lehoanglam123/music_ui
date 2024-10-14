@@ -90,7 +90,7 @@ function PlayerBar({ data }) {
                 </div>
                 <span className={cx('time-left')}>03:40</span>
             </div>
-            <audio ref={audioRef} src={data.audio} hidden />
+            {/* <audio ref={audioRef} src={data.audio} hidden /> */}
         </div>
     );
 }

@@ -1,18 +1,19 @@
 import { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import classNames from 'classnames/bind';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
     faEllipsis,
     faMicrophoneLines,
+    faPause,
     faPlay,
 } from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+import { NavLink } from 'react-router-dom';
 
-import images from '../assets/images';
-import styles from './Media.module.scss';
 import config from '~/config';
+import images from '../assets/images';
 import { GlobalDataContext } from '../GlobalContext';
+import styles from './Media.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +27,8 @@ function Media({
     data,
 }) {
     const [isHovered, setIshovered] = useState(false);
-    const globalData = useContext(GlobalDataContext);
+    const { isPlaying, handleShowPlayerControl, handleStopAudio } =
+        useContext(GlobalDataContext);
 
     const classes = cx('media', {
         [className]: className,
@@ -45,7 +47,7 @@ function Media({
     };
 
     const handlePlayMusic = () => {
-        globalData.handleShowPlayerControl(data);
+        handleShowPlayerControl(data);
     };
 
     return (
@@ -78,11 +80,17 @@ function Media({
                             icon={faMicrophoneLines}
                         />
                     )}
-                    {play && (
+                    {!isPlaying ? (
                         <FontAwesomeIcon
                             className={cx('media-play')}
                             icon={faPlay}
                             onClick={handlePlayMusic}
+                        />
+                    ) : (
+                        <FontAwesomeIcon
+                            className={cx('media-play')}
+                            icon={faPause}
+                            onClick={handleStopAudio}
                         />
                     )}
                     <FontAwesomeIcon
