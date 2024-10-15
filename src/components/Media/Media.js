@@ -80,7 +80,7 @@ function Media({
                             icon={faMicrophoneLines}
                         />
                     )}
-                    {!isPlaying ? (
+                    {play && !isPlaying ? (
                         <FontAwesomeIcon
                             className={cx('media-play')}
                             icon={faPlay}

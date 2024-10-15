@@ -18,17 +18,8 @@ import { GlobalDataContext } from '~/components/GlobalContext';
 const cx = classNames.bind(style);
 
 function PlayerBar({ data }) {
-    const { isPlaying, handlePlayingAudio, handleStopAudio, setAudioRef } =
+    const { isPlaying, handlePlayingAudio, handleStopAudio } =
         useContext(GlobalDataContext);
-    const audioRef = useRef(null);
-    // console.log(audioRef);
-
-    useEffect(() => {
-        if (audioRef.current) {
-            setAudioRef(audioRef.current);
-        }
-    }, [setAudioRef]);
-
     return (
         <div className={cx('player-bar')}>
             <div className={cx('player-items')}>
@@ -90,7 +81,6 @@ function PlayerBar({ data }) {
                 </div>
                 <span className={cx('time-left')}>03:40</span>
             </div>
-            {/* <audio ref={audioRef} src={data.audio} hidden /> */}
         </div>
     );
 }

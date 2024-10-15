@@ -5,33 +5,36 @@ const GlobalDataContext = createContext();
 function GlobalContext({ children }) {
     const [songData, setSongData] = useState({});
     const [isPlaying, setIsPlaying] = useState(false);
+    const [duration, setDuration] = useState('');
     const [showPlayerControl, setShowPlayerControl] = useState(false);
     const audioRef = useRef();
 
     // console.log(songData.audio);
     // console.log(audioRef);
+    const handleLoadStart = (e) => {
+        const src = e.nativeEvent.srcElement.src;
+        const audio = new Audio(src);
+        audio.onloadedmetadata = () => {
+            if (audio.readyState > 0) {
+                const min = Math.floor(302) / 60;
+                const second = Math.floor(302) % 60;
+                if (second >= 10) {
+                    console.log(Math.floor(min) + ':' + second);
+                } else {
+                    console.log(Math.floor(min) + ':0' + second);
+                }
+            }
+        };
+    };
 
     const handleShowPlayerControl = (data) => {
         setShowPlayerControl(true);
         setSongData(data);
-        handlePlayingAudio(data);
     };
 
     const handlePlayingAudio = (data) => {
         setIsPlaying(true);
-        const audio = audioRef.current;
-        if (audio.src !== data.audio) {
-            audio.src = data.audio;
-            audio.load();
-        }
-        audio.addEventListener(
-            'canplaythrough',
-            () => {
-                setIsPlaying(true);
-                audio.play();
-            },
-            { once: true },
-        );
+        audioRef.current.play();
     };
 
     const handleStopAudio = () => {
@@ -53,7 +56,12 @@ function GlobalContext({ children }) {
     return (
         <GlobalDataContext.Provider value={globalData}>
             {children}
-            <audio ref={audioRef} src={songData.audio} hidden />
+            <audio
+                ref={audioRef}
+                src={songData.audio}
+                hidden
+                onLoadStart={handleLoadStart}
+            />
         </GlobalDataContext.Provider>
     );
 }
