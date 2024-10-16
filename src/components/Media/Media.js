@@ -27,8 +27,7 @@ function Media({
     data,
 }) {
     const [isHovered, setIshovered] = useState(false);
-    const { isPlaying, handleShowPlayerControl, handleStopAudio } =
-        useContext(GlobalDataContext);
+    const { isPlaying, handlePlayingAudio } = useContext(GlobalDataContext);
 
     const classes = cx('media', {
         [className]: className,
@@ -46,10 +45,6 @@ function Media({
         }
     };
 
-    const handlePlayMusic = () => {
-        handleShowPlayerControl(data);
-    };
-
     return (
         <div
             className={classes}
@@ -59,7 +54,7 @@ function Media({
             <div className={cx('media-left')}>
                 <img
                     className={cx('image', size)}
-                    src={data?.image || images.avatarImage}
+                    src={data?.image || images.songImage}
                     alt="Avatar"
                 />
             </div>
@@ -80,18 +75,23 @@ function Media({
                             icon={faMicrophoneLines}
                         />
                     )}
-                    {play && !isPlaying ? (
-                        <FontAwesomeIcon
+                    {play && (
+                        <button
                             className={cx('media-play')}
-                            icon={faPlay}
-                            onClick={handlePlayMusic}
-                        />
-                    ) : (
-                        <FontAwesomeIcon
-                            className={cx('media-play')}
-                            icon={faPause}
-                            onClick={handleStopAudio}
-                        />
+                            onClick={handlePlayingAudio}
+                        >
+                            {!isPlaying ? (
+                                <FontAwesomeIcon
+                                    className={cx('icon-play')}
+                                    icon={faPlay}
+                                />
+                            ) : (
+                                <FontAwesomeIcon
+                                    className={cx('icon-play')}
+                                    icon={faPause}
+                                />
+                            )}
+                        </button>
                     )}
                     <FontAwesomeIcon
                         className={cx('media-item')}

@@ -18,7 +18,7 @@ import { GlobalDataContext } from '~/components/GlobalContext';
 const cx = classNames.bind(style);
 
 function PlayerBar({ data }) {
-    const { isPlaying, handlePlayingAudio, handleStopAudio } =
+    const { isPlaying, duration, handlePlayingAudio } =
         useContext(GlobalDataContext);
     return (
         <div className={cx('player-bar')}>
@@ -35,27 +35,19 @@ function PlayerBar({ data }) {
                         icon={faBackwardStep}
                     />
                 </button>
-                {!isPlaying ? (
-                    <button
-                        className={cx('control-btn')}
-                        onClick={handlePlayingAudio}
-                    >
+                <button onClick={handlePlayingAudio}>
+                    {!isPlaying ? (
                         <FontAwesomeIcon
-                            className={cx('control-item', 'item-play')}
                             icon={faCirclePlay}
-                        />
-                    </button>
-                ) : (
-                    <button
-                        className={cx('control-btn')}
-                        onClick={handleStopAudio}
-                    >
-                        <FontAwesomeIcon
                             className={cx('control-item', 'item-play')}
-                            icon={faCirclePause}
                         />
-                    </button>
-                )}
+                    ) : (
+                        <FontAwesomeIcon
+                            icon={faCirclePause}
+                            className={cx('control-item', 'item-play')}
+                        />
+                    )}
+                </button>
                 <button className={cx('control-btn')}>
                     <FontAwesomeIcon
                         className={cx('control-item')}
@@ -76,7 +68,7 @@ function PlayerBar({ data }) {
                         className={cx('range')}
                         type="range"
                         min="0"
-                        max="100"
+                        max={duration}
                     />
                 </div>
                 <span className={cx('time-left')}>03:40</span>
