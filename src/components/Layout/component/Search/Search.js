@@ -94,8 +94,7 @@ function Search() {
                                     key={result.id}
                                     data={result}
                                     size={'medium'}
-                                    className={'media-song'}
-                                    hoverToShowRight={true}
+                                    className={'media-search'}
                                     right
                                     play
                                 />

@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import {
     faBackwardStep,
@@ -18,8 +18,31 @@ import { GlobalDataContext } from '~/components/GlobalContext';
 const cx = classNames.bind(style);
 
 function PlayerBar({ data }) {
-    const { isPlaying, duration, handlePlayingAudio } =
+    const [duration, setDuration] = useState(0);
+    const audioRef = useRef();
+    const { isPlaying, setIsPlaying, setPlayAudioCallback } =
         useContext(GlobalDataContext);
+
+    useEffect(() => {
+        setPlayAudioCallback(() => handlePlayingAudio);
+    }, [setPlayAudioCallback]);
+    const handleLoadStart = (e) => {
+        const src = e.nativeEvent.srcElement.src;
+        const audio = new Audio(src);
+        audio.onloadedmetadata = function () {
+            if (audio.readyState > 0) {
+                // console.log(audio.duration);
+                setDuration(audio.duration);
+            }
+        };
+        console.log(e.nativeEvent.srcElement.src);
+    };
+
+    const handlePlayingAudio = () => {
+        playAudioCallback;
+        setIsPlaying(true);
+    };
+
     return (
         <div className={cx('player-bar')}>
             <div className={cx('player-items')}>
@@ -35,7 +58,7 @@ function PlayerBar({ data }) {
                         icon={faBackwardStep}
                     />
                 </button>
-                <button onClick={handlePlayingAudio}>
+                <button className={cx('play-btn')} onClick={handlePlayingAudio}>
                     {!isPlaying ? (
                         <FontAwesomeIcon
                             icon={faCirclePlay}
@@ -73,6 +96,12 @@ function PlayerBar({ data }) {
                 </div>
                 <span className={cx('time-left')}>03:40</span>
             </div>
+            <audio
+                ref={audioRef}
+                src={data.audio}
+                hidden
+                onLoadStart={handleLoadStart}
+            />
         </div>
     );
 }

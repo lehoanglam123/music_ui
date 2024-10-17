@@ -1,54 +1,19 @@
-import { createContext, useRef, useState } from 'react';
+import { createContext, useState } from 'react';
 
 const GlobalDataContext = createContext();
 
 function GlobalContext({ children }) {
-    const [songData, setSongData] = useState({});
     const [isPlaying, setIsPlaying] = useState(false);
-    const [duration, setDuration] = useState(0);
-    const audioRef = useRef();
-
-    const handleLoadStart = (e) => {
-        const src = e.nativeEvent.srcElement.src;
-        const audio = new Audio(src);
-
-        audio.onloadedmetadata = () => {
-            if (audio.readyState > 0) {
-                console.log(audio.duration);
-                setDuration(audio.duration);
-            }
-        };
-    };
-
-    const handlePlayingAudio = (data) => {
-        if (!isPlaying) {
-            setSongData(data);
-            audioRef.current.play();
-            setIsPlaying(true);
-        } else {
-            audioRef.current.pause();
-            setIsPlaying(false);
-        }
-    };
-
-    const globalData = {
-        songData,
+    const [playAudioCallback, setPlayAudioCallback] = useState(null);
+    const GlobalData = {
         isPlaying,
-        duration,
-        handlePlayingAudio,
-        setAudioRef: (ref) => {
-            audioRef.current = ref;
-        },
+        setIsPlaying,
+        playAudioCallback,
+        setPlayAudioCallback,
     };
     return (
-        <GlobalDataContext.Provider value={globalData}>
+        <GlobalDataContext.Provider value={GlobalData}>
             {children}
-            <audio
-                ref={audioRef}
-                src={songData.audio}
-                hidden
-                onLoadStart={handleLoadStart}
-            />
         </GlobalDataContext.Provider>
     );
 }

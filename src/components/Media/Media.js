@@ -17,40 +17,19 @@ import styles from './Media.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Media({
-    size,
-    className,
-    right = false,
-    list = false,
-    play = false,
-    hoverToShowRight = false,
-    data,
-}) {
-    const [isHovered, setIshovered] = useState(false);
-    const { isPlaying, handlePlayingAudio } = useContext(GlobalDataContext);
-
+function Media({ size, className, right = false, list = false, data }) {
+    const { playAudioCallback } = useContext(GlobalDataContext);
     const classes = cx('media', {
         [className]: className,
     });
 
-    const handleMouseEnter = () => {
-        if (hoverToShowRight) {
-            setIshovered(true);
+    const handlePlay = () => {
+        if (playAudioCallback) {
+            playAudioCallback();
         }
     };
-
-    const handleMouseLeave = () => {
-        if (hoverToShowRight) {
-            setIshovered(false);
-        }
-    };
-
     return (
-        <div
-            className={classes}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
+        <div className={classes}>
             <div className={cx('media-left')}>
                 <img
                     className={cx('image', size)}
@@ -67,7 +46,8 @@ function Media({
                     {data?.artistName}
                 </NavLink>
             </div>
-            {right && (!hoverToShowRight || isHovered) && (
+
+            {right && (
                 <div className={cx('media-right')}>
                     {list && (
                         <FontAwesomeIcon
@@ -75,24 +55,14 @@ function Media({
                             icon={faMicrophoneLines}
                         />
                     )}
-                    {play && (
-                        <button
-                            className={cx('media-play')}
-                            onClick={handlePlayingAudio}
-                        >
-                            {!isPlaying ? (
-                                <FontAwesomeIcon
-                                    className={cx('icon-play')}
-                                    icon={faPlay}
-                                />
-                            ) : (
-                                <FontAwesomeIcon
-                                    className={cx('icon-play')}
-                                    icon={faPause}
-                                />
-                            )}
-                        </button>
-                    )}
+
+                    <button className={cx('media-play')} onClick={handlePlay}>
+                        <FontAwesomeIcon
+                            className={cx('icon-play')}
+                            icon={faPlay}
+                        />
+                    </button>
+
                     <FontAwesomeIcon
                         className={cx('media-item')}
                         icon={faHeart}

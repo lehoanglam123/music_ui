@@ -11,9 +11,11 @@ const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
     const { isPlaying } = useContext(GlobalDataContext);
+    console.log(isPlaying);
+
     return (
         <div className={cx('wrapper')}>
-            {isPlaying ? <PlayerControl /> : <></>}
+            {isPlaying && <PlayerControl />}
             <Sidebar />
             <Header />
             <div className={cx('container')}>{children}</div>
