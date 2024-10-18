@@ -20,12 +20,8 @@ const cx = classNames.bind(style);
 function PlayerBar({ data }) {
     const [duration, setDuration] = useState(0);
     const audioRef = useRef();
-    const { isPlaying, setIsPlaying, setPlayAudioCallback } =
-        useContext(GlobalDataContext);
+    const { isPlaying, setIsPlaying } = useContext(GlobalDataContext);
 
-    useEffect(() => {
-        setPlayAudioCallback(() => handlePlayingAudio);
-    }, [setPlayAudioCallback]);
     const handleLoadStart = (e) => {
         const src = e.nativeEvent.srcElement.src;
         const audio = new Audio(src);
@@ -39,7 +35,6 @@ function PlayerBar({ data }) {
     };
 
     const handlePlayingAudio = () => {
-        playAudioCallback;
         setIsPlaying(true);
     };
 
@@ -98,7 +93,7 @@ function PlayerBar({ data }) {
             </div>
             <audio
                 ref={audioRef}
-                src={data.audio}
+                src={data?.audio}
                 hidden
                 onLoadStart={handleLoadStart}
             />

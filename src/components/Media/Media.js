@@ -18,16 +18,13 @@ import styles from './Media.module.scss';
 const cx = classNames.bind(styles);
 
 function Media({ size, className, right = false, list = false, data }) {
-    const { playAudioCallback } = useContext(GlobalDataContext);
     const classes = cx('media', {
         [className]: className,
     });
 
-    const handlePlay = () => {
-        if (playAudioCallback) {
-            playAudioCallback();
-        }
-    };
+    const { setPlayingCallback } = useContext(GlobalDataContext);
+
+    const handlePlayingAudio = () => {};
     return (
         <div className={classes}>
             <div className={cx('media-left')}>
@@ -56,7 +53,10 @@ function Media({ size, className, right = false, list = false, data }) {
                         />
                     )}
 
-                    <button className={cx('media-play')} onClick={handlePlay}>
+                    <button
+                        className={cx('media-play')}
+                        onClick={() => setPlayingCallback(handlePlayingAudio)}
+                    >
                         <FontAwesomeIcon
                             className={cx('icon-play')}
                             icon={faPlay}
