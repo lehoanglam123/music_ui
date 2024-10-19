@@ -18,16 +18,16 @@ import { GlobalDataContext } from '~/components/GlobalContext';
 const cx = classNames.bind(style);
 
 function PlayerBar({ data }) {
-    const [duration, setDuration] = useState(0);
     const audioRef = useRef();
-    const { isPlaying, setIsPlaying } = useContext(GlobalDataContext);
+    const [play, setPlay] = useState(false);
+    const [duration, setDuration] = useState(0);
+    const { isPlaying } = useContext(GlobalDataContext);
 
     const handleLoadStart = (e) => {
         const src = e.nativeEvent.srcElement.src;
         const audio = new Audio(src);
         audio.onloadedmetadata = function () {
             if (audio.readyState > 0) {
-                // console.log(audio.duration);
                 setDuration(audio.duration);
             }
         };
@@ -35,8 +35,18 @@ function PlayerBar({ data }) {
     };
 
     const handlePlayingAudio = () => {
-        setIsPlaying(true);
+        if (play) {
+            audioRef.current.pause();
+            setPlay(false);
+        } else {
+            audioRef.current.play();
+            setPlay(true);
+        }
     };
+
+    useEffect(() => {
+        handlePlayingAudio();
+    }, [isPlaying]);
 
     return (
         <div className={cx('player-bar')}>
@@ -54,14 +64,14 @@ function PlayerBar({ data }) {
                     />
                 </button>
                 <button className={cx('play-btn')} onClick={handlePlayingAudio}>
-                    {!isPlaying ? (
+                    {play ? (
                         <FontAwesomeIcon
-                            icon={faCirclePlay}
+                            icon={faCirclePause}
                             className={cx('control-item', 'item-play')}
                         />
                     ) : (
                         <FontAwesomeIcon
-                            icon={faCirclePause}
+                            icon={faCirclePlay}
                             className={cx('control-item', 'item-play')}
                         />
                     )}

@@ -4,17 +4,16 @@ const GlobalDataContext = createContext();
 
 function GlobalContext({ children }) {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [showPlayerBar, setShowPlayerBar] = useState(false);
+    const [dataMusic, setDataMusic] = useState({});
 
-    const setPlayingCallback = (callback) => {
-        setIsPlaying(true);
-        if (typeof callback === 'function') {
-            callback();
-        }
-    };
     const GlobalData = {
         isPlaying,
+        dataMusic,
+        showPlayerBar,
         setIsPlaying,
-        setPlayingCallback,
+        setDataMusic,
+        setShowPlayerBar,
     };
     return (
         <GlobalDataContext.Provider value={GlobalData}>

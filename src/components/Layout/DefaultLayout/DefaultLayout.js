@@ -10,12 +10,11 @@ import { GlobalDataContext } from '~/components/GlobalContext';
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
-    const { isPlaying } = useContext(GlobalDataContext);
-    console.log(isPlaying);
+    const { showPlayerBar } = useContext(GlobalDataContext);
 
     return (
         <div className={cx('wrapper')}>
-            {isPlaying && <PlayerControl />}
+            {showPlayerBar && <PlayerControl />}
             <Sidebar />
             <Header />
             <div className={cx('container')}>{children}</div>
