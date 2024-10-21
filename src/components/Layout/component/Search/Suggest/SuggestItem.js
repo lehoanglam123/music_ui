@@ -10,7 +10,7 @@ function SuggestItem({ suggestion }) {
     return (
         <div className={cx('suggest-item')}>
             <FontAwesomeIcon className={cx('suggest-icon')} icon={faSearch} />
-            <span className={cx('suggest-title')}>that may cho anh</span>
+            <span className={cx('suggest-title')}>Chúng Ta Của Hiện Tại</span>
         </div>
     );
 }

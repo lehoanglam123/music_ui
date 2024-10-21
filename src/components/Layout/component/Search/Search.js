@@ -17,7 +17,14 @@ import Suggest from './Suggest';
 import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
-
+const data = [
+    {
+        id: 1,
+        songName: 'Chúng Ta Của Hiện Tại',
+        artistName: 'Sơn Tùng-MTP',
+        audio: 'https://res.cloudinary.com/dcyemfp6o/video/upload/v1713276342/Music/Vietnam/Ch%C3%BAng%20ta%20c%E1%BB%A7a%20hi%E1%BB%87n%20t%E1%BA%A1i.mp3',
+    },
+];
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
@@ -27,30 +34,33 @@ function Search() {
     const debounce = useDebounce(searchValue, 500);
     const inputRef = useRef();
 
+    // useEffect(() => {
+    //     if (!debounce.trim()) {
+    //         setSearchResult([]);
+    //         return;
+    //     }
+    //     setLoading(true);
+    //     fetch(
+    //         `http://localhost:8080/api/admin/song/search?q=${encodeURIComponent(
+    //             debounce,
+    //         )}`,
+    //         {
+    //             method: 'GET',
+    //             cache: 'no-store',
+    //         },
+    //     )
+    //         .then((res) => res.json())
+    //         .then((res) => {
+    //             setSearchResult(res.data);
+    //             setLoading(false);
+    //         })
+    //         .catch(() => {
+    //             setLoading(false);
+    //         });
+    // }, [debounce]);
     useEffect(() => {
-        if (!debounce.trim()) {
-            setSearchResult([]);
-            return;
-        }
-        setLoading(true);
-        fetch(
-            `http://localhost:8080/api/admin/song/search?q=${encodeURIComponent(
-                debounce,
-            )}`,
-            {
-                method: 'GET',
-                cache: 'no-store',
-            },
-        )
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
-    }, [debounce]);
+        setSearchResult(data);
+    }, [searchResult]);
 
     const handleChange = (e) => {
         const searchValue = e.target.value;

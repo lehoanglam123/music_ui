@@ -14,14 +14,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import style from './PlayerBar.module.scss';
 import { GlobalDataContext } from '~/components/GlobalContext';
+import Timer from './Timer';
 
 const cx = classNames.bind(style);
 
 function PlayerBar({ data }) {
     const audioRef = useRef();
-    const [play, setPlay] = useState(false);
     const [duration, setDuration] = useState(0);
-    const { isPlaying } = useContext(GlobalDataContext);
+    const [currentTime, setCurrentTime] = useState(0);
+    const { isPlaying, showPlayIcon, setIsPlaying, setShowPlayIcon } =
+        useContext(GlobalDataContext);
 
     const handleLoadStart = (e) => {
         const src = e.nativeEvent.srcElement.src;
@@ -33,19 +35,29 @@ function PlayerBar({ data }) {
         };
         console.log(e.nativeEvent.srcElement.src);
     };
-
     const handlePlayingAudio = () => {
-        if (play) {
-            audioRef.current.pause();
-            setPlay(false);
+        if (isPlaying) {
+            setIsPlaying(false);
+            setShowPlayIcon(true);
         } else {
-            audioRef.current.play();
-            setPlay(true);
+            setIsPlaying(true);
+            setShowPlayIcon(false);
         }
     };
 
+    const handleTimeUpdate = () => {
+        const currentTime = audioRef.current.currentTime;
+        setCurrentTime(Math.floor(currentTime));
+    };
+
+    const changeCurrentTime = (e) => {
+        const currentTime = e.target.value;
+        audioRef.current.currentTime = currentTime;
+        setCurrentTime(currentTime);
+    };
+
     useEffect(() => {
-        handlePlayingAudio();
+        isPlaying ? audioRef.current.play() : audioRef.current.pause();
     }, [isPlaying]);
 
     return (
@@ -64,14 +76,14 @@ function PlayerBar({ data }) {
                     />
                 </button>
                 <button className={cx('play-btn')} onClick={handlePlayingAudio}>
-                    {play ? (
+                    {showPlayIcon ? (
                         <FontAwesomeIcon
-                            icon={faCirclePause}
+                            icon={faCirclePlay}
                             className={cx('control-item', 'item-play')}
                         />
                     ) : (
                         <FontAwesomeIcon
-                            icon={faCirclePlay}
+                            icon={faCirclePause}
                             className={cx('control-item', 'item-play')}
                         />
                     )}
@@ -90,22 +102,25 @@ function PlayerBar({ data }) {
                 </button>
             </div>
             <div className={cx('player-duration')}>
-                <span className={cx('time-right')}>00:00</span>
+                <span className={cx('time-right')}>{Timer(currentTime)}</span>
                 <div className={cx('player-control')}>
                     <input
                         className={cx('range')}
                         type="range"
-                        min="0"
+                        min={0}
                         max={duration}
+                        value={currentTime}
+                        onChange={(e) => changeCurrentTime(e)}
                     />
                 </div>
-                <span className={cx('time-left')}>03:40</span>
+                <span className={cx('time-left')}>{Timer(duration)}</span>
             </div>
             <audio
                 ref={audioRef}
                 src={data?.audio}
                 hidden
                 onLoadStart={handleLoadStart}
+                onTimeUpdate={handleTimeUpdate}
             />
         </div>
     );

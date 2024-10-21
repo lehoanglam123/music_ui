@@ -18,19 +18,24 @@ import styles from './Media.module.scss';
 const cx = classNames.bind(styles);
 
 function Media({ size, className, right = false, list = false, data }) {
-    const [play, setPlay] = useState(false);
-    const { setShowPlayerBar, setIsPlaying, setDataMusic } =
-        useContext(GlobalDataContext);
+    const {
+        setShowPlayerBar,
+        setIsPlaying,
+        setDataMusic,
+        setShowPlayIcon,
+        isPlaying,
+        showPlayIcon,
+    } = useContext(GlobalDataContext);
 
     const handlePlayingAudio = () => {
         setDataMusic(data);
-        if (!play) {
-            setPlay(true);
-            setShowPlayerBar(true);
-            setIsPlaying(true);
-        } else {
+        setShowPlayerBar(true);
+        if (isPlaying) {
             setIsPlaying(false);
-            setPlay(false);
+            setShowPlayIcon(true);
+        } else {
+            setIsPlaying(true);
+            setShowPlayIcon(false);
         }
     };
 
@@ -70,15 +75,15 @@ function Media({ size, className, right = false, list = false, data }) {
                         className={cx('media-play')}
                         onClick={handlePlayingAudio}
                     >
-                        {play ? (
+                        {showPlayIcon ? (
                             <FontAwesomeIcon
                                 className={cx('icon-play')}
-                                icon={faPause}
+                                icon={faPlay}
                             />
                         ) : (
                             <FontAwesomeIcon
                                 className={cx('icon-play')}
-                                icon={faPlay}
+                                icon={faPause}
                             />
                         )}
                     </button>

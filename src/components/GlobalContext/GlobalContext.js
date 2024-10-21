@@ -4,6 +4,7 @@ const GlobalDataContext = createContext();
 
 function GlobalContext({ children }) {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [showPlayIcon, setShowPlayIcon] = useState(true);
     const [showPlayerBar, setShowPlayerBar] = useState(false);
     const [dataMusic, setDataMusic] = useState({});
 
@@ -11,9 +12,11 @@ function GlobalContext({ children }) {
         isPlaying,
         dataMusic,
         showPlayerBar,
+        showPlayIcon,
         setIsPlaying,
         setDataMusic,
         setShowPlayerBar,
+        setShowPlayIcon,
     };
     return (
         <GlobalDataContext.Provider value={GlobalData}>
