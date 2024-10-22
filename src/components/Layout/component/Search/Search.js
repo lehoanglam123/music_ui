@@ -24,6 +24,12 @@ const data = [
         artistName: 'Sơn Tùng-MTP',
         audio: 'https://res.cloudinary.com/dcyemfp6o/video/upload/v1713276342/Music/Vietnam/Ch%C3%BAng%20ta%20c%E1%BB%A7a%20hi%E1%BB%87n%20t%E1%BA%A1i.mp3',
     },
+    {
+        id: 2,
+        songName: 'Blank Space',
+        artistName: 'Taylor Swift',
+        audio: 'https://res.cloudinary.com/dcyemfp6o/video/upload/v1729608172/Music/Vietnam/song1_cuyaqn.mp3',
+    },
 ];
 function Search() {
     const [searchValue, setSearchValue] = useState('');

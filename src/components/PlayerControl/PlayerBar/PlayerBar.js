@@ -22,8 +22,14 @@ function PlayerBar({ data }) {
     const audioRef = useRef();
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    const { isPlaying, showPlayIcon, setIsPlaying, setShowPlayIcon } =
-        useContext(GlobalDataContext);
+    const {
+        isPlaying,
+        showPlayIcon,
+        setIsPlaying,
+        setShowPlayIcon,
+        setActiveSongId,
+        dataMusic,
+    } = useContext(GlobalDataContext);
 
     const handleLoadStart = (e) => {
         const src = e.nativeEvent.srcElement.src;
@@ -39,9 +45,11 @@ function PlayerBar({ data }) {
         if (isPlaying) {
             setIsPlaying(false);
             setShowPlayIcon(true);
+            setActiveSongId(data?.id);
         } else {
             setIsPlaying(true);
             setShowPlayIcon(false);
+            setActiveSongId(dataMusic?.id);
         }
     };
 
@@ -57,8 +65,15 @@ function PlayerBar({ data }) {
     };
 
     useEffect(() => {
-        isPlaying ? audioRef.current.play() : audioRef.current.pause();
-    }, [isPlaying]);
+        if (dataMusic.audio !== audioRef.current.src) {
+            audioRef.current.load();
+        }
+        if (isPlaying) {
+            audioRef.current.play();
+        } else {
+            audioRef.current.pause();
+        }
+    }, [dataMusic, isPlaying]);
 
     return (
         <div className={cx('player-bar')}>

@@ -19,23 +19,28 @@ const cx = classNames.bind(styles);
 
 function Media({ size, className, right = false, list = false, data }) {
     const {
+        isPlaying,
+        showPlayIcon,
+        activeSongId,
         setShowPlayerBar,
         setIsPlaying,
         setDataMusic,
         setShowPlayIcon,
-        isPlaying,
-        showPlayIcon,
+        setActiveSongId,
     } = useContext(GlobalDataContext);
 
     const handlePlayingAudio = () => {
         setDataMusic(data);
         setShowPlayerBar(true);
-        if (isPlaying) {
+        if (activeSongId === data?.id) {
             setIsPlaying(false);
             setShowPlayIcon(true);
+            setActiveSongId(null);
         } else {
-            setIsPlaying(true);
+            // setIsPlaying(true);
             setShowPlayIcon(false);
+            setActiveSongId(data.id);
+            setTimeout(() => setIsPlaying(true), 0);
         }
     };
 
@@ -75,7 +80,7 @@ function Media({ size, className, right = false, list = false, data }) {
                         className={cx('media-play')}
                         onClick={handlePlayingAudio}
                     >
-                        {showPlayIcon ? (
+                        {!(isPlaying && activeSongId === data.id) ? (
                             <FontAwesomeIcon
                                 className={cx('icon-play')}
                                 icon={faPlay}
