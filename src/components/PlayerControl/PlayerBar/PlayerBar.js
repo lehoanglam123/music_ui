@@ -49,7 +49,7 @@ function PlayerBar({ data }) {
         } else {
             setIsPlaying(true);
             setShowPlayIcon(false);
-            setActiveSongId(dataMusic?.id);
+            setActiveSongId(data?.id);
         }
     };
 
@@ -64,6 +64,7 @@ function PlayerBar({ data }) {
         setCurrentTime(currentTime);
     };
 
+    const handleNextPlaying = () => {};
     useEffect(() => {
         if (dataMusic.audio !== audioRef.current.src) {
             audioRef.current.load();
@@ -78,7 +79,10 @@ function PlayerBar({ data }) {
     return (
         <div className={cx('player-bar')}>
             <div className={cx('player-items')}>
-                <button className={cx('control-btn')}>
+                <button
+                    className={cx('control-btn')}
+                    onClick={() => handleNextPlaying}
+                >
                     <FontAwesomeIcon
                         className={cx('control-item')}
                         icon={faShuffle}
