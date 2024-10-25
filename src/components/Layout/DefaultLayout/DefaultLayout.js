@@ -14,7 +14,7 @@ function DefaultLayout({ children }) {
 
     return (
         <div className={cx('wrapper')}>
-            {showPlayerBar && <PlayerControl />}
+            {true && <PlayerControl />}
             <Sidebar />
             <Header />
             <div className={cx('container')}>{children}</div>

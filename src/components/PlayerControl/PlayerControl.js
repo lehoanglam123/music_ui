@@ -5,6 +5,7 @@ import Media from '../Media';
 import style from './PlayerControl.module.scss';
 import PlayerBar from './PlayerBar';
 import { GlobalDataContext } from '../GlobalContext';
+import { PlayerRight } from './PlayerRight';
 
 const cx = classNames.bind(style);
 function PlayerControl() {
@@ -22,7 +23,9 @@ function PlayerControl() {
             <div className={cx('control-center')}>
                 <PlayerBar data={dataMusic} />
             </div>
-            <div className={cx('control-right')}>Options</div>
+            <div className={cx('control-right')}>
+                <PlayerRight />
+            </div>
         </div>
     );
 }

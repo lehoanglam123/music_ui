@@ -1,1 +1,1 @@
-export { default } from './Options';
+export { default as PlayerRight } from './Options';
