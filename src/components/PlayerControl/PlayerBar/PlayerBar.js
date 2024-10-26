@@ -25,6 +25,7 @@ function PlayerBar({ data }) {
     const {
         isPlaying,
         showPlayIcon,
+        volume,
         setIsPlaying,
         setShowPlayIcon,
         setActiveSongId,
@@ -75,6 +76,13 @@ function PlayerBar({ data }) {
             audioRef.current.pause();
         }
     }, [dataMusic, isPlaying]);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            console.log(volume / 100);
+            audioRef.current.volume = volume / 100;
+        }
+    }, [volume]);
 
     return (
         <div className={cx('player-bar')}>

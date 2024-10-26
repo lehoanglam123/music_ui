@@ -1,4 +1,4 @@
-import react, { useContext } from 'react';
+import { useContext } from 'react';
 import classNames from 'classnames/bind';
 
 import Media from '../Media';
