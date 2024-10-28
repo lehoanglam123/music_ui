@@ -27,6 +27,9 @@
     height: 6px;
     // appearance: none;
     border-radius: 5px;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .volumn::-webkit-slider-thumb {

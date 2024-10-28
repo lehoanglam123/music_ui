@@ -11,7 +11,7 @@ import {
 import { faWindowRestore } from '@fortawesome/free-regular-svg-icons';
 
 import styles from './Options.module.scss';
-import { GlobalDataContext } from '~/components/GlobalContext';
+import { GlobalDataContext } from '~/components/GlobalDataProvider';
 
 const cx = classNames.bind(styles);
 function Options() {

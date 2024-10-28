@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom';
 
 import config from '~/config';
 import images from '../assets/images';
-import { GlobalDataContext } from '../GlobalContext';
+import { GlobalDataContext } from '../GlobalDataProvider';
 import styles from './Media.module.scss';
 
 const cx = classNames.bind(styles);

@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 
 const GlobalDataContext = createContext();
 
-function GlobalContext({ children }) {
+function GlobaleDataProvider({ children }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [showPlayIcon, setShowPlayIcon] = useState(true);
     const [showPlayerBar, setShowPlayerBar] = useState(false);
@@ -31,4 +31,4 @@ function GlobalContext({ children }) {
     );
 }
 
-export { GlobalContext, GlobalDataContext };
+export { GlobaleDataProvider, GlobalDataContext };

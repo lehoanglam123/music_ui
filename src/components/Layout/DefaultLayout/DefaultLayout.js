@@ -5,7 +5,7 @@ import styles from './DefaultLayout.module.scss';
 import Header from '~/components/Layout/component/Header';
 import Sidebar from '~/components/Layout/component/Sidebar';
 import PlayerControl from '~/components/PlayerControl';
-import { GlobalDataContext } from '~/components/GlobalContext';
+import { GlobalDataContext } from '~/components/GlobalDataProvider';
 
 const cx = classNames.bind(styles);
 

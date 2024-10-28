@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import Media from '../Media';
 import style from './PlayerControl.module.scss';
 import PlayerBar from './PlayerBar';
-import { GlobalDataContext } from '../GlobalContext';
+import { GlobalDataContext } from '../GlobalDataProvider';
 import { PlayerRight } from './PlayerRight';
 
 const cx = classNames.bind(style);

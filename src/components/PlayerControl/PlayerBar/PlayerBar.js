@@ -13,7 +13,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import style from './PlayerBar.module.scss';
-import { GlobalDataContext } from '~/components/GlobalContext';
+import { GlobalDataContext } from '~/components/GlobalDataProvider';
 import Timer from './Timer';
 
 const cx = classNames.bind(style);
@@ -42,6 +42,7 @@ function PlayerBar({ data }) {
         };
         console.log(e.nativeEvent.srcElement.src);
     };
+
     const handlePlayingAudio = () => {
         if (isPlaying) {
             setIsPlaying(false);
@@ -63,9 +64,20 @@ function PlayerBar({ data }) {
         const currentTime = e.target.value;
         audioRef.current.currentTime = currentTime;
         setCurrentTime(currentTime);
+        if (currentTime < duration) {
+            setIsPlaying(true);
+            setShowPlayIcon(false);
+            audioRef.current.play();
+        }
     };
 
     const handleNextPlaying = () => {};
+
+    const handleAudioEnd = () => {
+        setIsPlaying(false);
+        setShowPlayIcon(true);
+    };
+
     useEffect(() => {
         if (dataMusic.audio !== audioRef.current.src) {
             audioRef.current.load();
@@ -79,7 +91,6 @@ function PlayerBar({ data }) {
 
     useEffect(() => {
         if (audioRef.current) {
-            console.log(volume / 100);
             audioRef.current.volume = volume / 100;
         }
     }, [volume]);
@@ -148,6 +159,7 @@ function PlayerBar({ data }) {
                 hidden
                 onLoadStart={handleLoadStart}
                 onTimeUpdate={handleTimeUpdate}
+                onEnded={handleAudioEnd}
             />
         </div>
     );
