@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,14 +12,15 @@ import { faWindowRestore } from '@fortawesome/free-regular-svg-icons';
 
 import styles from './Options.module.scss';
 import { GlobalDataContext } from '~/components/GlobalDataProvider';
+import Lyrics from '../Lyrics';
 
 const cx = classNames.bind(styles);
 function Options() {
     const { volume, setVolume } = useContext(GlobalDataContext);
     const volumeRef = useRef();
+    const [showLyrics, setShowLyrics] = useState(false);
 
     const handleVolumeChange = (e) => {
-        // console.log(e.target.value);
         setVolume(Number(e.target.value));
     };
 
@@ -31,9 +32,13 @@ function Options() {
             setVolume(volumeRef.current);
         }
     };
+
     return (
         <div className={cx('options')}>
-            <button className={cx('option-btn')}>
+            <button
+                className={cx('option-btn')}
+                onClick={() => setShowLyrics(true)}
+            >
                 <FontAwesomeIcon
                     className={cx('option-icon')}
                     icon={faMicrophoneLines}
@@ -80,6 +85,7 @@ function Options() {
                     icon={faUpRightAndDownLeftFromCenter}
                 />
             </button>
+            {showLyrics && <Lyrics></Lyrics>}
         </div>
     );
 }

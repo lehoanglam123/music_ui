@@ -3,6 +3,9 @@
 }
 
 .option-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-white);
     padding: 8px;
     margin: 0 2px;
@@ -15,6 +18,8 @@
 
 .option-icon {
     font-size: 1.6rem;
+    width: 1.6rem; /* Đặt chiều rộng cố định để các icon không đẩy nhau */
+    text-align: center; /* Căn giữa icon trong khung */
 }
 
 .option-volumn {

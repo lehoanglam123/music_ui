@@ -20,15 +20,27 @@ const cx = classNames.bind(styles);
 const data = [
     {
         id: 1,
-        songName: 'Chúng Ta Của Hiện Tại',
-        artistName: 'Sơn Tùng-MTP',
-        audio: 'https://res.cloudinary.com/dcyemfp6o/video/upload/v1713276342/Music/Vietnam/Ch%C3%BAng%20ta%20c%E1%BB%A7a%20hi%E1%BB%87n%20t%E1%BA%A1i.mp3',
-    },
-    {
-        id: 2,
-        songName: 'Blank Space',
-        artistName: 'Taylor Swift',
-        audio: 'https://res.cloudinary.com/dcyemfp6o/video/upload/v1729608172/Music/Vietnam/song1_cuyaqn.mp3',
+        songName: 'ít thôi nhưng dài lâu',
+        artistName: 'Yan Nguyễn',
+        audio: 'https://res.cloudinary.com/dcyemfp6o/video/upload/v1730298176/Music/Vietnam/it-thoi-nhung-dai-lau.mp3',
+        lyrics:
+            'Mai này trang giấy trắng nhật kí anh lưu sao đầy' +
+            '...những thói quen em mỗi ngày' +
+            'Hay hờn ghen giận dỗi...chen lối đi trên đường về...' +
+            'khi em giấc say anh ngồi đây' +
+            'Ghi điều anh sợ nhất...lạc mất em nơi đông người...' +
+            'quen nắm tay em mất rồi' +
+            'Ghi điều em thắc mắc câu hỏi yêu em thế nào?....' +
+            'Anh yêu ít thôi, nhưng dài lâu !!!' +
+            'Ít thôi nhé không nhiều...vì từng chiều thường hay đưa đón...' +
+            'Đón em đến tương lai dễ thương như hiện tại' +
+            'Ít thôi nhé em hỡi để hiểu thói quen nhau...' +
+            'Để đêm đêm khắc sâu những yêu thương nhiệm màu' +
+            'Ít thôi nhé không cần...nhiều thật nhiều vì anh đã hứa....' +
+            'Hứa sẽ mãi bên em đến khi em còn chờ...' +
+            'ít thôi nhé em hỡi mới biết lúc xa nhau' +
+            'Chỉ mong sao chữ LÂU sẽ trôi qua thật MAU.' +
+            'Ít thôi nhé em ơi… để bên nhau dài lâu',
     },
 ];
 function Search() {
