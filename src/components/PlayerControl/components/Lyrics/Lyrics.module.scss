@@ -10,6 +10,15 @@
     background-position: center;
     color: #fff;
     padding: 20px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation-fill-mode: forwards;
+    &.show {
+        animation: moveUp 0.5s ease-out;
+    }
+
+    &.hide {
+        animation: moveDown 0.5s ease-out;
+    }
 }
 
 .lyrics::before {
@@ -19,7 +28,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -57,7 +66,7 @@
     font-weight: 700;
     color: hsla(0, 0%, 100%, 0.5);
 
-    &:active {
+    &.active {
         background-color: var(--alpha-color);
         padding: 7px 50px;
         border-radius: 999px;
@@ -88,4 +97,26 @@
 
 .action-icon {
     font-size: 1.8rem;
+}
+
+@keyframes moveUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes moveDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
 }

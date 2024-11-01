@@ -8,12 +8,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Lyrics.module.scss';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function Lyrics() {
+function Lyrics({ onClose, isVisible, lyrics }) {
+    const [active, setActive] = useState(true);
+
+    const handleActiveTabs = () => {
+        setActive(true);
+    };
     return (
-        <div className={cx('lyrics')}>
+        <div className={cx('lyrics', { show: isVisible, hide: !isVisible })}>
             <div className={cx('lyrics-header')}>
                 <h2 className={cx('logo')}>
                     <FontAwesomeIcon
@@ -22,17 +28,27 @@ function Lyrics() {
                     />
                 </h2>
                 <ul className={cx('tabs')}>
-                    <NavLink className={cx('tab-item')}>Lời bài hát</NavLink>
-                    <NavLink className={cx('tab-item')}>Karaoke</NavLink>
+                    <NavLink
+                        className={cx('tab-item', { active: active })}
+                        onClick={handleActiveTabs}
+                    >
+                        Lời bài hát
+                    </NavLink>
+                    <NavLink
+                        className={cx('tab-item', { active: active })}
+                        onClick={handleActiveTabs}
+                    >
+                        Karaoke
+                    </NavLink>
                 </ul>
                 <div className={cx('action-group')}>
-                    <button className={cx('action-btn')}>
+                    <button className={cx('action-btn')} onClick={() => {}}>
                         <FontAwesomeIcon
                             className={cx('action-icon')}
                             icon={faUpRightAndDownLeftFromCenter}
                         />
                     </button>
-                    <button className={cx('action-btn')}>
+                    <button className={cx('action-btn')} onClick={onClose}>
                         <FontAwesomeIcon
                             className={cx('action-icon')}
                             icon={faChevronDown}

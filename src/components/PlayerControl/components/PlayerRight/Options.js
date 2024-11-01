@@ -18,7 +18,8 @@ const cx = classNames.bind(styles);
 function Options() {
     const { volume, setVolume } = useContext(GlobalDataContext);
     const volumeRef = useRef();
-    const [showLyrics, setShowLyrics] = useState(false);
+    const [isLyricsVisible, setIsLyricsVisible] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const handleVolumeChange = (e) => {
         setVolume(Number(e.target.value));
@@ -33,12 +34,19 @@ function Options() {
         }
     };
 
+    const handleShowLyrics = () => {
+        setIsAnimating(true);
+        setIsLyricsVisible(true);
+    };
+
+    const handleCloseLyrics = () => {
+        setIsLyricsVisible(false);
+        setIsAnimating(false);
+    };
+
     return (
         <div className={cx('options')}>
-            <button
-                className={cx('option-btn')}
-                onClick={() => setShowLyrics(true)}
-            >
+            <button className={cx('option-btn')} onClick={handleShowLyrics}>
                 <FontAwesomeIcon
                     className={cx('option-icon')}
                     icon={faMicrophoneLines}
@@ -85,7 +93,9 @@ function Options() {
                     icon={faUpRightAndDownLeftFromCenter}
                 />
             </button>
-            {showLyrics && <Lyrics></Lyrics>}
+            {isLyricsVisible && (
+                <Lyrics isVisible={isAnimating} onClose={handleCloseLyrics} />
+            )}
         </div>
     );
 }
