@@ -1,19 +1,21 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faChevronDown,
     faCompactDisc,
     faUpRightAndDownLeftFromCenter,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
 
 import styles from './Lyrics.module.scss';
-import { useState } from 'react';
+import PlayerBar from '../../components/PlayerBar';
 
 const cx = classNames.bind(styles);
 
-function Lyrics({ onClose, isVisible, lyrics }) {
+function Lyrics({ onClose, isVisible, data }) {
     const [active, setActive] = useState(true);
+    console.log(data.lyrics);
 
     const handleActiveTabs = () => {
         setActive(true);
@@ -57,7 +59,9 @@ function Lyrics({ onClose, isVisible, lyrics }) {
                 </div>
             </div>
             <div className={cx('lyrics-body')}></div>
-            <div className={cx('lyrics-controls')}></div>
+            <div className={cx('lyrics-controls')}>
+                <PlayerBar data={data} />
+            </div>
         </div>
     );
 }

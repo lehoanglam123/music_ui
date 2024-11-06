@@ -9,13 +9,14 @@ import {
     faVolumeXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { faWindowRestore } from '@fortawesome/free-regular-svg-icons';
+import 'tippy.js/dist/tippy.css';
 
 import styles from './Options.module.scss';
 import { GlobalDataContext } from '~/components/GlobalDataProvider';
-import Lyrics from '../Lyrics';
+import Lyrics from './Lyrics';
 
 const cx = classNames.bind(styles);
-function Options() {
+function Options({ data }) {
     const { volume, setVolume } = useContext(GlobalDataContext);
     const volumeRef = useRef();
     const [isLyricsVisible, setIsLyricsVisible] = useState(false);
@@ -94,7 +95,11 @@ function Options() {
                 />
             </button>
             {isLyricsVisible && (
-                <Lyrics isVisible={isAnimating} onClose={handleCloseLyrics} />
+                <Lyrics
+                    isVisible={isAnimating}
+                    onClose={handleCloseLyrics}
+                    lyrics={data}
+                />
             )}
         </div>
     );

@@ -20,7 +20,6 @@ const cx = classNames.bind(styles);
 function Media({ size, className, right = false, list = false, data }) {
     const {
         isPlaying,
-        showPlayIcon,
         activeSongId,
         setShowPlayerBar,
         setIsPlaying,
