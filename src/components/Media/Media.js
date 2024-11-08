@@ -36,7 +36,6 @@ function Media({ size, className, right = false, list = false, data }) {
             setShowPlayIcon(true);
             setActiveSongId(null);
         } else {
-            // setIsPlaying(true);
             setShowPlayIcon(false);
             setActiveSongId(data.id);
             setTimeout(() => setIsPlaying(true), 0);

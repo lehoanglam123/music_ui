@@ -8,14 +8,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
-import styles from './Lyrics.module.scss';
-import PlayerBar from '../../components/PlayerBar';
+import PlayerBar from '../PlayerBar';
+import styles from './LyricsDisplay.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Lyrics({ onClose, isVisible, data }) {
+function LyricsDisplay({ onClose, isVisible, data }) {
     const [active, setActive] = useState(true);
-    console.log(data.lyrics);
+    console.log(data);
 
     const handleActiveTabs = () => {
         setActive(true);
@@ -60,10 +60,10 @@ function Lyrics({ onClose, isVisible, data }) {
             </div>
             <div className={cx('lyrics-body')}></div>
             <div className={cx('lyrics-controls')}>
-                <PlayerBar data={data} />
+                {/* <PlayerBar data={data} /> */}
             </div>
         </div>
     );
 }
 
-export default Lyrics;
+export default LyricsDisplay;

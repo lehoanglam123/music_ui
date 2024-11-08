@@ -22,7 +22,6 @@ function PlayerBar({ data }) {
     const audioRef = useRef();
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    useEffect(() => console.log(data.lyrics), [data]);
 
     const {
         isPlaying,
