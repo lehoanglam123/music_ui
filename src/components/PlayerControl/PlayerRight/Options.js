@@ -19,7 +19,7 @@ function Options({ data }) {
     const { volume, setVolume } = useContext(GlobalDataContext);
     const volumeRef = useRef();
     const [isLyricsVisible, setIsLyricsVisible] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
 
     const handleVolumeChange = (e) => {
         setVolume(Number(e.target.value));
@@ -35,13 +35,15 @@ function Options({ data }) {
     };
 
     const handleShowLyrics = () => {
-        setIsAnimating(true);
         setIsLyricsVisible(true);
+        setIsClosing(false);
     };
 
     const handleCloseLyrics = () => {
-        setIsLyricsVisible(false);
-        setIsAnimating(false);
+        setIsClosing(true);
+        setTimeout(() => {
+            setIsLyricsVisible(false);
+        }, 400);
     };
 
     return (
@@ -95,7 +97,8 @@ function Options({ data }) {
             </button>
             {isLyricsVisible && (
                 <LyricsDisplay
-                    isVisible={isAnimating}
+                    isVisible={isLyricsVisible}
+                    isClosing={isClosing}
                     onClose={handleCloseLyrics}
                     lyrics={data}
                 />

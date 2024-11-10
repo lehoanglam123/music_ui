@@ -8,20 +8,25 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
-import PlayerBar from '../PlayerBar';
 import styles from './LyricsDisplay.module.scss';
+import images from '~/components/assets/images';
 
 const cx = classNames.bind(styles);
+const titles = [
+    { id: 1, name: 'Lời bài hát' },
+    { id: 2, name: 'Karaoke' },
+];
 
-function LyricsDisplay({ onClose, isVisible, data }) {
-    const [active, setActive] = useState(true);
-    console.log(data);
+function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
+    const [activeTab, setActiveTab] = useState(1);
+    // console.log(data);
 
-    const handleActiveTabs = () => {
-        setActive(true);
+    const handleActiveTabs = (id) => {
+        setActiveTab(id);
     };
+
     return (
-        <div className={cx('lyrics', { show: isVisible, hide: !isVisible })}>
+        <div className={cx('lyrics', { show: isVisible, hide: isClosing })}>
             <div className={cx('lyrics-header')}>
                 <h2 className={cx('logo')}>
                     <FontAwesomeIcon
@@ -30,18 +35,19 @@ function LyricsDisplay({ onClose, isVisible, data }) {
                     />
                 </h2>
                 <ul className={cx('tabs')}>
-                    <NavLink
-                        className={cx('tab-item', { active: active })}
-                        onClick={handleActiveTabs}
-                    >
-                        Lời bài hát
-                    </NavLink>
-                    <NavLink
-                        className={cx('tab-item', { active: active })}
-                        onClick={handleActiveTabs}
-                    >
-                        Karaoke
-                    </NavLink>
+                    {titles.map((title) => (
+                        <>
+                            <NavLink
+                                key={title.id}
+                                className={cx('tab-item', {
+                                    active: activeTab === title.id,
+                                })}
+                                onClick={() => handleActiveTabs(title.id)}
+                            >
+                                {title.name}
+                            </NavLink>
+                        </>
+                    ))}
                 </ul>
                 <div className={cx('action-group')}>
                     <button className={cx('action-btn')} onClick={() => {}}>
@@ -58,7 +64,26 @@ function LyricsDisplay({ onClose, isVisible, data }) {
                     </button>
                 </div>
             </div>
-            <div className={cx('lyrics-body')}></div>
+            <div className={cx('lyrics-body')}>
+                <img className={cx('body-image')} src={images.avatarImage} />
+                <div className={cx('scroll')}>
+                    <ul className={cx('body-item')}>
+                        <li className={cx('item')}>Mai này trang giấy trắng</li>
+                        <li className={cx('item')}>Nhật ký anh lưu sao đầy</li>
+                        <li className={cx('item')}>
+                            Những thói quen em mỗi ngày
+                        </li>
+                        <li className={cx('item')}>Hay hờn ghen giận dỗi</li>
+                        <li className={cx('item')}>
+                            Chen lối đi trên đường về
+                        </li>
+                        <li className={cx('item')}>
+                            Khi em giấc say anh ngồi đây
+                        </li>
+                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
+                    </ul>
+                </div>
+            </div>
             <div className={cx('lyrics-controls')}>
                 {/* <PlayerBar data={data} /> */}
             </div>

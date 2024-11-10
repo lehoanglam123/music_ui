@@ -5,12 +5,13 @@
     right: 0;
     bottom: 0;
     display: flex;
+    flex-wrap: wrap;
     background-image: url('~/src/components/assets/images/bground1.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
     padding: 20px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.5 ease, transform 0.5 ease;
     animation-fill-mode: forwards;
     &.show {
         animation: moveUp 0.5s ease-out;
@@ -97,6 +98,32 @@
 
 .action-icon {
     font-size: 1.8rem;
+}
+
+//Lyrics-body
+.lyrics-body {
+    display: flex;
+    flex: 1;
+}
+
+.body-image {
+    height: 340px;
+    width: 340px;
+    border-radius: 4px;
+    margin-right: 35px;
+}
+
+.body-item {
+    width: 100%;
+    flex: 1;
+    height: 100%;
+}
+
+.item {
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.2;
+    padding: 15px 0;
 }
 
 @keyframes moveUp {
