@@ -101,29 +101,27 @@
 }
 
 //Lyrics-body
+
 .lyrics-body {
     display: flex;
-    flex: 1;
+    height: calc(100% - 90px);
+}
+
+.body-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .body-image {
-    height: 340px;
-    width: 340px;
+    width: 300px;
+    height: 300px;
     border-radius: 4px;
-    margin-right: 35px;
 }
 
-.body-item {
-    width: 100%;
+.body-right {
     flex: 1;
-    height: 100%;
-}
-
-.item {
-    font-weight: 700;
-    font-size: 3rem;
-    line-height: 1.2;
-    padding: 15px 0;
 }
 
 @keyframes moveUp {

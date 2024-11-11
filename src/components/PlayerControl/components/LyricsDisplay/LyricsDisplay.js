@@ -65,8 +65,17 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                 </div>
             </div>
             <div className={cx('lyrics-body')}>
-                <img className={cx('body-image')} src={images.avatarImage} />
-                <div className={cx('scroll')}>
+                <div className={cx('body-left')}>
+                    <img
+                        className={cx('body-image')}
+                        src={images.avatarImage}
+                    />
+                    <span className={cx('body-info')}>
+                        Ít thôi nhưng dài lâu - Yan Nguyễn
+                    </span>
+                </div>
+
+                <div className={cx('body-right')}>
                     <ul className={cx('body-item')}>
                         <li className={cx('item')}>Mai này trang giấy trắng</li>
                         <li className={cx('item')}>Nhật ký anh lưu sao đầy</li>
