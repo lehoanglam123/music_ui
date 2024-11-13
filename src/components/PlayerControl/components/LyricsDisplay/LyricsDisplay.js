@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import {
     faChevronDown,
     faCompactDisc,
@@ -36,17 +35,15 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                 </h2>
                 <ul className={cx('tabs')}>
                     {titles.map((title) => (
-                        <>
-                            <NavLink
-                                key={title.id}
-                                className={cx('tab-item', {
-                                    active: activeTab === title.id,
-                                })}
-                                onClick={() => handleActiveTabs(title.id)}
-                            >
-                                {title.name}
-                            </NavLink>
-                        </>
+                        <div
+                            key={title.id}
+                            className={cx('tab-item', {
+                                active: activeTab === title.id,
+                            })}
+                            onClick={() => handleActiveTabs(title.id)}
+                        >
+                            {title.name}
+                        </div>
                     ))}
                 </ul>
                 <div className={cx('action-group')}>
@@ -71,10 +68,9 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                         src={images.avatarImage}
                     />
                     <span className={cx('body-info')}>
-                        Ít thôi nhưng dài lâu - Yan Nguyễn
+                        Ít Thôi Nhưng Dài Lâu - Yan Nguyễn
                     </span>
                 </div>
-
                 <div className={cx('body-right')}>
                     <ul className={cx('body-item')}>
                         <li className={cx('item')}>Mai này trang giấy trắng</li>
@@ -89,6 +85,12 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                         <li className={cx('item')}>
                             Khi em giấc say anh ngồi đây
                         </li>
+                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
+                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
+                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
+                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
+                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
+                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
                         <li className={cx('item')}>Ghi điều anh sợ nhất</li>
                     </ul>
                 </div>

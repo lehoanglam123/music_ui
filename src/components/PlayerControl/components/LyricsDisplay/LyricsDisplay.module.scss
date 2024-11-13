@@ -54,10 +54,11 @@
 
 //Tabs
 .tabs {
-    background-color: var(--alpha-color);
     padding: 3px;
+    display: flex;
+    align-items: center;
     border-radius: 999px;
-    padding: 7px 0;
+    background-color: var(--alpha-color);
 }
 
 .tab-item {
@@ -68,9 +69,10 @@
     color: hsla(0, 0%, 100%, 0.5);
 
     &.active {
-        background-color: var(--alpha-color);
+        color: var(--text-white);
         padding: 7px 50px;
         border-radius: 999px;
+        background-color: var(--alpha-color);
     }
 }
 
@@ -105,13 +107,26 @@
 .lyrics-body {
     display: flex;
     height: calc(100% - 90px);
+    width: 100%;
+}
+
+.body-left,
+.body-right {
+    display: flex;
 }
 
 .body-left {
-    display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    .body-info {
+        font-weight: 500;
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-top: 20px;
+    }
 }
 
 .body-image {
@@ -121,7 +136,19 @@
 }
 
 .body-right {
-    flex: 1;
+    flex: 1.5;
+    width: 100%;
+
+    .body-item {
+        width: 100%;
+    }
+
+    .item {
+        font-weight: 700;
+        font-size: 3rem;
+        line-height: 1.2;
+        padding: 15px 0;
+    }
 }
 
 @keyframes moveUp {
