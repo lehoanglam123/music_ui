@@ -140,7 +140,12 @@
     width: 100%;
 
     .body-item {
+        overflow-y: overlay;
         width: 100%;
+    }
+
+    .body-item::-webkit-scrollbar {
+        display: none;
     }
 
     .item {
