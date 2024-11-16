@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     faChevronDown,
     faCompactDisc,
@@ -9,6 +9,7 @@ import classNames from 'classnames/bind';
 
 import styles from './LyricsDisplay.module.scss';
 import images from '~/components/assets/images';
+import ParseLyrics from './ParseLyrics';
 
 const cx = classNames.bind(styles);
 const titles = [
@@ -18,7 +19,13 @@ const titles = [
 
 function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
     const [activeTab, setActiveTab] = useState(1);
-    // console.log(data);
+    const [lyrics, setLyrics] = useState([]);
+
+    useEffect(() => {
+        setLyrics(ParseLyrics(data.lyrics));
+        console.log(lyrics);
+        lyrics.map((item) => console.log(item));
+    }, [data.lyrics]);
 
     const handleActiveTabs = (id) => {
         setActiveTab(id);
@@ -73,25 +80,11 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                 </div>
                 <div className={cx('body-right')}>
                     <ul className={cx('body-item')}>
-                        <li className={cx('item')}>Mai này trang giấy trắng</li>
-                        <li className={cx('item')}>Nhật ký anh lưu sao đầy</li>
-                        <li className={cx('item')}>
-                            Những thói quen em mỗi ngày
-                        </li>
-                        <li className={cx('item')}>Hay hờn ghen giận dỗi</li>
-                        <li className={cx('item')}>
-                            Chen lối đi trên đường về
-                        </li>
-                        <li className={cx('item')}>
-                            Khi em giấc say anh ngồi đây
-                        </li>
-                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
-                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
-                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
-                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
-                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
-                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
-                        <li className={cx('item')}>Ghi điều anh sợ nhất</li>
+                        {lyrics.map((item, index) => (
+                            <li key={index} className={cx('item')}>
+                                {item}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

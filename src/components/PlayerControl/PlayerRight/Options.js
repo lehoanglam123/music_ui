@@ -100,7 +100,7 @@ function Options({ data }) {
                     isVisible={isLyricsVisible}
                     isClosing={isClosing}
                     onClose={handleCloseLyrics}
-                    lyrics={data}
+                    data={data}
                 />
             )}
         </div>

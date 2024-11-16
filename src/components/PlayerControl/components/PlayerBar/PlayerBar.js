@@ -41,7 +41,7 @@ function PlayerBar({ data }) {
                 setDuration(audio.duration);
             }
         };
-        console.log(e.nativeEvent.srcElement.src);
+        // console.log(e.nativeEvent.srcElement.src);
     };
 
     const handlePlayingAudio = () => {
