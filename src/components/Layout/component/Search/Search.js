@@ -20,7 +20,7 @@ const cx = classNames.bind(styles);
 const data = [
     {
         id: 1,
-        songName: 'ít thôi nhưng dài lâu',
+        songName: 'Ít thôi nhưng dài lâu',
         artistName: 'Yan Nguyễn',
         audio: 'https://res.cloudinary.com/dcyemfp6o/video/upload/v1730298176/Music/Vietnam/it-thoi-nhung-dai-lau.mp3',
         lyrics:

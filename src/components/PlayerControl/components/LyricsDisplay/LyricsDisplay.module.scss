@@ -152,6 +152,14 @@
     }
 }
 
+.is-over {
+    color: #ffffff90;
+}
+
+.is-active {
+    color: #ffed00;
+}
+
 @keyframes moveUp {
     from {
         transform: translateY(100%);

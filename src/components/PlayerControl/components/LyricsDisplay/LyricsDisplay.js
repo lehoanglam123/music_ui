@@ -19,17 +19,18 @@ const titles = [
 
 function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
     const [activeTab, setActiveTab] = useState(1);
+    const [currentLine, setCurrentLine] = useState(0);
     const [lyrics, setLyrics] = useState([]);
 
     useEffect(() => {
         setLyrics(ParseLyrics(data.lyrics));
-        console.log(lyrics);
-        lyrics.map((item) => console.log(item));
     }, [data.lyrics]);
 
     const handleActiveTabs = (id) => {
         setActiveTab(id);
     };
+
+    useEffect(() => {});
 
     return (
         <div className={cx('lyrics', { show: isVisible, hide: isClosing })}>
@@ -75,7 +76,7 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                         src={images.avatarImage}
                     />
                     <span className={cx('body-info')}>
-                        Ít Thôi Nhưng Dài Lâu - Yan Nguyễn
+                        {data.songName} - {data.artistName}
                     </span>
                 </div>
                 <div className={cx('body-right')}>
