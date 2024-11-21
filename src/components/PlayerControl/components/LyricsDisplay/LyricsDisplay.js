@@ -19,11 +19,12 @@ const titles = [
 
 function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
     const [activeTab, setActiveTab] = useState(1);
-    const [currentLine, setCurrentLine] = useState(0);
-    const [lyrics, setLyrics] = useState([]);
+    const [lyrics, setLyrics] = useState();
 
     useEffect(() => {
+        console.log(data.lyrics);
         setLyrics(ParseLyrics(data.lyrics));
+        console.log(lyrics);
     }, [data.lyrics]);
 
     const handleActiveTabs = (id) => {
@@ -81,11 +82,11 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                 </div>
                 <div className={cx('body-right')}>
                     <ul className={cx('body-item')}>
-                        {lyrics.map((item, index) => (
+                        {/* {lyrics.map((item, index) => (
                             <li key={index} className={cx('item')}>
                                 {item}
                             </li>
-                        ))}
+                        ))} */}
                     </ul>
                 </div>
             </div>
