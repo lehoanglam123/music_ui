@@ -9,29 +9,30 @@ import classNames from 'classnames/bind';
 
 import styles from './LyricsDisplay.module.scss';
 import images from '~/components/assets/images';
-import ParseLyrics from './ParseLyrics';
 
 const cx = classNames.bind(styles);
-const titles = [
+const tabs = [
     { id: 1, name: 'Lời bài hát' },
     { id: 2, name: 'Karaoke' },
 ];
 
 function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
     const [activeTab, setActiveTab] = useState(1);
-    const [lyrics, setLyrics] = useState();
-
-    useEffect(() => {
-        console.log(data.lyrics);
-        setLyrics(ParseLyrics(data.lyrics));
-        console.log(lyrics);
-    }, [data.lyrics]);
+    const [lyrics, setLyrics] = useState(() => {
+        let lyrics = [];
+        if (data && data.lyrics) {
+            lyrics = data.lyrics.map((item) => item.lyric);
+        }
+        return lyrics;
+    }); // data.lyrics is an array of lyrics
 
     const handleActiveTabs = (id) => {
         setActiveTab(id);
     };
 
-    useEffect(() => {});
+    useEffect(() => {
+        console.log('lyrics state: ', lyrics);
+    }, [data]);
 
     return (
         <div className={cx('lyrics', { show: isVisible, hide: isClosing })}>
@@ -43,15 +44,15 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                     />
                 </h2>
                 <ul className={cx('tabs')}>
-                    {titles.map((title) => (
+                    {tabs.map((tab) => (
                         <div
-                            key={title.id}
+                            key={tab.id}
                             className={cx('tab-item', {
-                                active: activeTab === title.id,
+                                active: activeTab === tab.id,
                             })}
-                            onClick={() => handleActiveTabs(title.id)}
+                            onClick={() => handleActiveTabs(tab.id)}
                         >
-                            {title.name}
+                            {tab.name}
                         </div>
                     ))}
                 </ul>
@@ -82,11 +83,11 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                 </div>
                 <div className={cx('body-right')}>
                     <ul className={cx('body-item')}>
-                        {/* {lyrics.map((item, index) => (
-                            <li key={index} className={cx('item')}>
-                                {item}
+                        {lyrics.map((lyric, index) => (
+                            <li key={index} className={cx('lyric-item')}>
+                                {lyric}
                             </li>
-                        ))} */}
+                        ))}
                     </ul>
                 </div>
             </div>
