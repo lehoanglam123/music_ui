@@ -1,10 +1,6 @@
 function Timer(time) {
-    let min = '0' + Math.floor(time / 60);
-    let second = Math.floor(time % 60);
-    if (second < 10) {
-        second = '0' + second;
-    }
-    return `${min}:${second}`;
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `0${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 }
-
 export default Timer;

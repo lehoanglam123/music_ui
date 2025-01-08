@@ -9,7 +9,7 @@ function GlobaleDataProvider({ children }) {
     const [activeSongId, setActiveSongId] = useState(null);
     const [dataMusic, setDataMusic] = useState({});
     const [volume, setVolume] = useState(40);
-    const [currentTime, setCurrentTime] = useState(0);
+    const [currentTimeGlobal, setCurrentTimeGlobal] = useState(0);
 
     const GlobalData = {
         isPlaying,
@@ -18,14 +18,14 @@ function GlobaleDataProvider({ children }) {
         showPlayerBar,
         showPlayIcon,
         volume,
-        currentTime,
+        currentTimeGlobal,
         setIsPlaying,
         setDataMusic,
         setShowPlayerBar,
         setShowPlayIcon,
         setActiveSongId,
         setVolume,
-        setCurrentTime,
+        setCurrentTimeGlobal,
     };
     return (
         <GlobalDataContext.Provider value={GlobalData}>

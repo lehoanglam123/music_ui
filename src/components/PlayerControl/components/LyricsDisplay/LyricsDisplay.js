@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {
     faChevronDown,
     faCompactDisc,
@@ -9,6 +9,7 @@ import classNames from 'classnames/bind';
 
 import styles from './LyricsDisplay.module.scss';
 import images from '~/components/assets/images';
+import { GlobalDataContext } from '~/components/GlobalDataProvider';
 
 const cx = classNames.bind(styles);
 const tabs = [
@@ -17,22 +18,54 @@ const tabs = [
 ];
 
 function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
+    const { currentTimeGlobal } = useContext(GlobalDataContext);
     const [activeTab, setActiveTab] = useState(1);
+    const [currentLyric, setCurrentLyric] = useState('');
+    const [activeIndexs, setActiveIndexs] = useState(null);
+    const [overIndexes, setOverIndexs] = useState([]);
     const [lyrics, setLyrics] = useState(() => {
         let lyrics = [];
         if (data && data.lyrics) {
-            lyrics = data.lyrics.map((item) => item.lyric);
+            lyrics = data.lyrics.map((item) => item);
         }
         return lyrics;
-    }); // data.lyrics is an array of lyrics
+    });
 
     const handleActiveTabs = (id) => {
         setActiveTab(id);
     };
 
+    const convertTimestampToSeconds = (timestamp) => {
+        const [minutes, seconds] = timestamp.split(':');
+        return Math.floor(parseInt(minutes, 10) * 60 + parseFloat(seconds));
+    };
+
+    const lyricsWithSeconds = lyrics.map((item) => ({
+        time: convertTimestampToSeconds(item.timestamp),
+        lyrics: item.lyric,
+    }));
+
     useEffect(() => {
-        console.log('lyrics state: ', lyrics);
-    }, [data]);
+        console.log(lyricsWithSeconds);
+        const currentTime = convertTimestampToSeconds(currentTimeGlobal);
+        console.log(currentTime);
+        const currentIndex = lyricsWithSeconds.find((item, index) => {
+            const nextItem = lyricsWithSeconds[index + 1];
+            return (
+                currentTime === item.time ||
+                (currentTime > item.time && currentTime < nextItem.time)
+            );
+        });
+        if (currentIndex !== -1 && currentIndex !== activeIndexs) {
+            // Cập nhật trạng thái cho dòng đang active
+            setActiveIndexs(currentIndex);
+
+            // Thêm dòng hiện tại vào danh sách các dòng đã qua
+            if (activeIndexs !== null && !overIndexes.includes(activeIndexs)) {
+                setOverIndexs((prev) => [...prev, activeIndexs]);
+            }
+        }
+    }, [currentTimeGlobal, lyricsWithSeconds, activeIndexs, overIndexes]);
 
     return (
         <div className={cx('lyrics', { show: isVisible, hide: isClosing })}>
@@ -84,8 +117,14 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                 <div className={cx('body-right')}>
                     <ul className={cx('body-item')}>
                         {lyrics.map((lyric, index) => (
-                            <li key={index} className={cx('lyric-item')}>
-                                {lyric}
+                            <li
+                                key={index}
+                                className={cx('lyric-item', {
+                                    'is-active': activeIndexs === index,
+                                    'is-over': overIndexes.includes(index),
+                                })}
+                            >
+                                {lyric.lyric}
                             </li>
                         ))}
                     </ul>

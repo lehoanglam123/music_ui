@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './PlayerBar.module.scss';
 import { GlobalDataContext } from '~/components/GlobalDataProvider';
 import Timer from './Timer';
+import TimeConvert from './TimeConvert';
 
 const cx = classNames.bind(style);
 
@@ -31,6 +32,7 @@ function PlayerBar({ data }) {
         setShowPlayIcon,
         setActiveSongId,
         dataMusic,
+        setCurrentTimeGlobal,
     } = useContext(GlobalDataContext);
 
     const handleLoadStart = (e) => {
@@ -59,6 +61,7 @@ function PlayerBar({ data }) {
     const handleTimeUpdate = () => {
         const currentTime = audioRef.current.currentTime;
         setCurrentTime(Math.floor(currentTime));
+        setCurrentTimeGlobal(TimeConvert(currentTime));
     };
 
     const changeCurrentTime = (e) => {
