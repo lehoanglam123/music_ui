@@ -20,9 +20,9 @@ const tabs = [
 function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
     const { currentTimeGlobal } = useContext(GlobalDataContext);
     const [activeTab, setActiveTab] = useState(1);
-    const [currentLyric, setCurrentLyric] = useState('');
-    const [activeIndexs, setActiveIndexs] = useState(null);
-    const [overIndexes, setOverIndexs] = useState([]);
+    // const [currentLyric, setCurrentLyric] = useState('');
+    const [activeIndex, setActiveIndex] = useState(null);
+    const [overIndexes, setOverIndexes] = useState([]);
     const [lyrics, setLyrics] = useState(() => {
         let lyrics = [];
         if (data && data.lyrics) {
@@ -46,26 +46,27 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
     }));
 
     useEffect(() => {
-        console.log(lyricsWithSeconds);
         const currentTime = convertTimestampToSeconds(currentTimeGlobal);
-        console.log(currentTime);
-        const currentIndex = lyricsWithSeconds.find((item, index) => {
+        const currentIndex = lyricsWithSeconds.findIndex((item, index) => {
             const nextItem = lyricsWithSeconds[index + 1];
             return (
                 currentTime === item.time ||
-                (currentTime > item.time && currentTime < nextItem.time)
+                (currentTime > item.time &&
+                    (!nextItem || currentTime < nextItem.time))
             );
         });
-        if (currentIndex !== -1 && currentIndex !== activeIndexs) {
-            // Cập nhật trạng thái cho dòng đang active
-            setActiveIndexs(currentIndex);
-
-            // Thêm dòng hiện tại vào danh sách các dòng đã qua
-            if (activeIndexs !== null && !overIndexes.includes(activeIndexs)) {
-                setOverIndexs((prev) => [...prev, activeIndexs]);
+        if (currentIndex !== -1 && currentIndex !== activeIndex) {
+            setActiveIndex(currentIndex);
+            if (activeIndex !== null && !overIndexes.includes(activeIndex)) {
+                setOverIndexes([...overIndexes, activeIndex]);
             }
         }
-    }, [currentTimeGlobal, lyricsWithSeconds, activeIndexs, overIndexes]);
+    }, [
+        convertTimestampToSeconds(currentTimeGlobal),
+        lyricsWithSeconds,
+        activeIndex,
+        overIndexes,
+    ]);
 
     return (
         <div className={cx('lyrics', { show: isVisible, hide: isClosing })}>
@@ -120,7 +121,7 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                             <li
                                 key={index}
                                 className={cx('lyric-item', {
-                                    'is-active': activeIndexs === index,
+                                    'is-active': activeIndex === index,
                                     'is-over': overIndexes.includes(index),
                                 })}
                             >
