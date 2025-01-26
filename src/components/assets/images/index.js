@@ -3,6 +3,7 @@ const images = {
     noImage: require('~/components/assets/images/no-image.png'),
     songImage: require('~/components/assets/images/ST-MTP.png'),
     background1: require('~/components/assets/images/bground1.jpg'),
+    artistImg: require('~/components/assets/images/Yan-Nguyen.jpg'),
 };
 
 export default images;

@@ -51,7 +51,7 @@ function Media({ size, className, right = false, list = false, data }) {
             <div className={cx('media-left')}>
                 <img
                     className={cx('image', size)}
-                    src={data?.image || images.songImage}
+                    src={data?.image || images.artistImg}
                     alt="Avatar"
                 />
             </div>

@@ -15,7 +15,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './PlayerBar.module.scss';
 import { GlobalDataContext } from '~/components/GlobalDataProvider';
 import Timer from './Timer';
-import TimeConvert from './TimeConvert';
 
 const cx = classNames.bind(style);
 
@@ -43,7 +42,6 @@ function PlayerBar({ data }) {
                 setDuration(audio.duration);
             }
         };
-        // console.log(e.nativeEvent.srcElement.src);
     };
 
     const handlePlayingAudio = () => {
@@ -59,9 +57,9 @@ function PlayerBar({ data }) {
     };
 
     const handleTimeUpdate = () => {
-        const currentTime = audioRef.current.currentTime;
-        setCurrentTime(Math.floor(currentTime));
-        setCurrentTimeGlobal(TimeConvert(currentTime));
+        const currentTime = parseFloat(audioRef.current.currentTime.toFixed(2));
+        setCurrentTime(currentTime);
+        setCurrentTimeGlobal(currentTime);
     };
 
     const changeCurrentTime = (e) => {

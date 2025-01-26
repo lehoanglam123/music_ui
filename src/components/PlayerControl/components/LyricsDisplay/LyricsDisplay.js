@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import {
     faChevronDown,
     faCompactDisc,
@@ -10,6 +10,7 @@ import classNames from 'classnames/bind';
 import styles from './LyricsDisplay.module.scss';
 import images from '~/components/assets/images';
 import { GlobalDataContext } from '~/components/GlobalDataProvider';
+import timeConvert from '../PlayerBar/TimeConvert';
 
 const cx = classNames.bind(styles);
 const tabs = [
@@ -20,7 +21,6 @@ const tabs = [
 function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
     const { currentTimeGlobal } = useContext(GlobalDataContext);
     const [activeTab, setActiveTab] = useState(1);
-    // const [currentLyric, setCurrentLyric] = useState('');
     const [activeIndex, setActiveIndex] = useState(null);
     const [overIndexes, setOverIndexes] = useState([]);
     const [lyrics, setLyrics] = useState(() => {
@@ -35,38 +35,34 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
         setActiveTab(id);
     };
 
-    const convertTimestampToSeconds = (timestamp) => {
-        const [minutes, seconds] = timestamp.split(':');
-        return Math.floor(parseInt(minutes, 10) * 60 + parseFloat(seconds));
-    };
-
     const lyricsWithSeconds = lyrics.map((item) => ({
-        time: convertTimestampToSeconds(item.timestamp),
-        lyrics: item.lyric,
+        time: timeConvert(item.timestamp),
+        lyric: item.lyric,
     }));
 
     useEffect(() => {
-        const currentTime = convertTimestampToSeconds(currentTimeGlobal);
         const currentIndex = lyricsWithSeconds.findIndex((item, index) => {
             const nextItem = lyricsWithSeconds[index + 1];
             return (
-                currentTime === item.time ||
-                (currentTime > item.time &&
-                    (!nextItem || currentTime < nextItem.time))
+                currentTimeGlobal === item.time ||
+                (currentTimeGlobal > item.time &&
+                    (!nextItem || currentTimeGlobal < nextItem.time))
             );
         });
         if (currentIndex !== -1 && currentIndex !== activeIndex) {
             setActiveIndex(currentIndex);
+            if (overIndexes.length === 0 && currentIndex > 1) {
+                const prevIndexes = lyrics.filter(
+                    (item, index) => index < currentIndex,
+                );
+                setOverIndexes(prevIndexes.map((item, index) => index));
+            }
             if (activeIndex !== null && !overIndexes.includes(activeIndex)) {
                 setOverIndexes([...overIndexes, activeIndex]);
             }
         }
-    }, [
-        convertTimestampToSeconds(currentTimeGlobal),
-        lyricsWithSeconds,
-        activeIndex,
-        overIndexes,
-    ]);
+        setActiveIndex(currentIndex);
+    }, [currentTimeGlobal]);
 
     return (
         <div className={cx('lyrics', { show: isVisible, hide: isClosing })}>
@@ -107,10 +103,7 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
             </div>
             <div className={cx('lyrics-body')}>
                 <div className={cx('body-left')}>
-                    <img
-                        className={cx('body-image')}
-                        src={images.avatarImage}
-                    />
+                    <img className={cx('body-image')} src={images.artistImg} />
                     <span className={cx('body-info')}>
                         {data.songName} - {data.artistName}
                     </span>
