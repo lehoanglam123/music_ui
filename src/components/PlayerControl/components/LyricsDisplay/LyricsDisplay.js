@@ -30,6 +30,8 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
         }
         return lyrics;
     });
+    const lyricsContainerRef = useRef(null); // Ref cho container
+    const lyricRefs = useRef([]); // Ref cho từng dòng lời bài hát
 
     const handleActiveTabs = (id) => {
         setActiveTab(id);
@@ -63,6 +65,15 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
         }
         setActiveIndex(currentIndex);
     }, [currentTimeGlobal]);
+
+    useEffect(() => {
+        if (activeIndex !== null && lyricRefs.current[activeIndex]) {
+            lyricRefs.current[activeIndex].scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
+    }, [activeIndex]);
 
     return (
         <div className={cx('lyrics', { show: isVisible, hide: isClosing })}>
@@ -113,6 +124,7 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
                         {lyrics.map((lyric, index) => (
                             <li
                                 key={index}
+                                ref={(el) => (lyricRefs.current[index] = el)}
                                 className={cx('lyric-item', {
                                     'is-active': activeIndex === index,
                                     'is-over': overIndexes.includes(index),
