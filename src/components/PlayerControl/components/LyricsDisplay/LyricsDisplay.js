@@ -30,7 +30,6 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
         }
         return lyrics;
     });
-    const lyricsContainerRef = useRef(null); // Ref cho container
     const lyricRefs = useRef([]); // Ref cho từng dòng lời bài hát
 
     const handleActiveTabs = (id) => {
@@ -68,6 +67,7 @@ function LyricsDisplay({ onClose, isVisible, isClosing, data }) {
 
     useEffect(() => {
         if (activeIndex !== null && lyricRefs.current[activeIndex]) {
+            console.log(lyricRefs.current[activeIndex]);
             lyricRefs.current[activeIndex].scrollIntoView({
                 behavior: 'smooth',
                 block: 'center',

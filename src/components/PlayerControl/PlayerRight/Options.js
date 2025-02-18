@@ -16,7 +16,8 @@ import LyricsDisplay from '../components/LyricsDisplay';
 
 const cx = classNames.bind(styles);
 function Options({ data }) {
-    const { volume, setVolume } = useContext(GlobalDataContext);
+    const { volume, setVolume, isDisplay, setIsDisplay } =
+        useContext(GlobalDataContext);
     const volumeRef = useRef();
     const [isLyricsVisible, setIsLyricsVisible] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -46,6 +47,10 @@ function Options({ data }) {
         }, 400);
     };
 
+    const handleShowPlayList = () => {
+        setIsDisplay(!isDisplay);
+    };
+
     return (
         <div className={cx('options')}>
             <button className={cx('option-btn')} onClick={handleShowLyrics}>
@@ -54,7 +59,7 @@ function Options({ data }) {
                     icon={faMicrophoneLines}
                 />
             </button>
-            <button className={cx('option-btn')}>
+            <button className={cx('option-btn')} onClick={handleShowPlayList}>
                 <FontAwesomeIcon className={cx('option-icon')} icon={faBars} />
             </button>
             <button className={cx('option-btn')}>
